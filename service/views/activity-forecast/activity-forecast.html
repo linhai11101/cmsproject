@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>活动预告</title>
+
+<% include ../block/head.html %>
+
+<link href="<%= assetsPath %>/cms/css/activity-forecast/activity-forecast.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	
+<% include ../components/header-en.html %>
+
+<div id="banner">
+	<img width="100%" src="<%- resize(forecastIndex[0].img,1920,480,3) %>" alt="">
+	<!-- <img width="100%" src="<%= assetsPath %>/global/images/cms/act/forecast-banner.png" alt=""> -->
+</div>
+
+<div id="act-Furniture" class="outer_wrap">
+	<div id="content" class="uk-container-center">
+	
+		<div class="nav_wrap">
+			<div class="nav uk-clearfix">
+				<% forecastCate.forEach(function(item,i){ %>
+				<a class="bg<%= i+1 %>" href="<%= item.link %>">
+					<span><%= item.name %></span>
+				</a>
+				<% }) %>
+			</div>
+		</div>
+
+		<div class="ad_list">
+			<h2>Activity Trailer<span> 活动预告</span></h2>
+			<ul class="list">
+			<% forecast.forEach(function(item,index){ %>
+				<li class="uk-clearfix">
+					<div class="uk-float-left">
+						<!-- <img src="<%= assetsPath %>/global/images/cms/act/ad.png" alt=""> -->
+						<img src="<%- resize(item.img,580,516,3) %>" alt="">
+					</div>
+					<div class="uk-float-right">
+						<h5>Activity Theme</h5>
+						<h3><%= item.title %></h3>
+						<h4><%= item.describe %></h4>
+						<div class="date">
+							<h6>Activity Time</h6>
+							<p><%= item.time %></p>
+						</div>
+						<div class="who">
+							<h6>Participants</h6>
+							<p><%= item.participant %></p>
+						</div>
+						<div class="aims">
+							<h6>Activity Goal</h6>
+							<p><%= item.target %></p>
+						</div>
+						<a v-on:click="showProcess('table<%= index+1 %>')" class="" href="javascript:;"><i class="uk-icon-plus"> </i>View</a>
+					</div>
+				</li>
+			<% }) %>
+			</ul>
+		</div>
+
+		<div class="pre_act">
+
+			<h2>Successive activities<span> 历届活动</span></h2>
+			<div class="swiper-container">
+        <div class="swiper-wrapper">
+        <% homeActs.forEach(function(item,index){ %>
+          <div class="swiper-slide">
+						<a href="<%= item.link %>">
+							<img src="<%- resize(item.img, 275, 175, 3) %>" alt="">
+							<p title="<%= item.name %>"><%- substr(item.name, 70) %></p>
+						</a>
+           </div>
+        <% }) %>
+                   <!--  <div class="swiper-slide">
+						<a href="#">
+							<img src="<%= assetsPath %>/global/images/cms/act/bottom-ad.png" alt="">
+							<p>The 4th China (Ganzhou) Furniture Expo and The Mr-World & The 1st...</p>
+						</a>
+                    </div>
+
+                    <div class="swiper-slide">
+						<a href="#">
+							<img src="<%= assetsPath %>/global/images/cms/act/bottom-ad.png" alt="">
+							<p>The 4th China (Ganzhou) Furniture Expo and The Mr-World & The 1st...</p>
+						</a>
+                    </div>
+
+                    <div class="swiper-slide">
+						<a href="#">
+							<img src="<%= assetsPath %>/global/images/cms/act/bottom-ad.png" alt="">
+							<p>The 4th China (Ganzhou) Furniture Expo and The Mr-World & The 1st...</p>
+						</a>
+                    </div>
+
+                    <div class="swiper-slide">
+						<a href="#">
+							<img src="<%= assetsPath %>/global/images/cms/act/bottom-ad.png" alt="">
+							<p>The 4th China (Ganzhou) Furniture Expo and The Mr-World & The 1st...</p>
+						</a>
+                    </div> -->
+          </div>
+                <!-- <div class="swiper-pagination"></div> -->
+          <div class="swiper-button-prev swiper-button-white"></div>
+          <div class="swiper-button-next swiper-button-white"></div>
+
+        </div>
+
+		</div>
+
+	</div>
+
+
+	
+	<div id="table1" class="table1 table_style">
+
+		<p>1、The global buyers will arrive in Nankang on July 31st afternoon. They will stay and have dinner at Lufu Novoland (Jiuzhou) International Hotel. </p>
+		<p>2、At 9 AM to 12 PM of August 1st to Aug 3rd , The buyers will attend the High-end Business Matching Event.</p>
+		<table class="uk-table">
+			<thead>
+				<tr>
+					<th width="10%">No.</th>
+					<th width="20%">Time</th>
+					<th width="70%">Content</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>8:00</td>
+					<td style="text-align:left;">Breakfast</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>8:30</td>
+					<td style="text-align:left;">The buyers go to Nankang Furniture Wholesale Markets by bus. Each market takes about half a day. (Zhongxin Wholesale Market, Guangming Wholesale Market, Exposition Center)</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>9:00-11:00</td>
+					<td style="text-align:left;">
+						The buyers and suppliers will attend the Business Event.<br/>
+						Contents:<br/>
+						The leader will make a welcome speech;<br/>
+						The representatives of suppliers will  introduce their products(3-5 suppliers, 5 minutes for each);<br/>
+						The suppliers communicate with buyers about business;<br/>
+						Calculate the number of pre-orders,announce pre-orders  and take photos.<br/>
+					</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>14:00-17：30</td>
+					<td style="text-align:left;">
+						The buyers return to the hotel by bus and have lunch.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>3、At 2PM to 5:30 PM of Aug 1st to Aug 3rd,the buyers will visit Wholesale Market and Shops inside.</p>
+
+		<table class="uk-table">
+			<thead>
+				<tr>
+					<th width="10%">No.</th>
+					<th width="20%">Time</th>
+					<th width="70%">Content</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>14:00-17：30</td>
+					<td style="text-align:left;">
+						The buyers will visit the wholesale markets with professional translators. Each market will takes about half a day (Zhongxin Wholesale Market, Guangming Wholesale Market, Exposition Center).<br/>
+						Contents:<br/>
+						The buyers will be in groups depending on their purchasing requests;<br/>
+						The buyers visit the shops in wholesale markets;<br/>
+						The buyers could use Mr-World APP to get products information and suppliers information easily from shops with QR Codes.<br/>
+						The buyers will take photos together.
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>17:30</td>
+					<td style="text-align:left;">
+						The buyers will go back to hotel by bus and have dinner in hotel.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>4、on the Aug 4th to Aug 5th ,the buyers will visit the Ruijin Republic Cradle Tourist Area and go back to Guangzhou after the trip.</p>
+
+		<table class="uk-table">
+			<thead>
+				<tr>
+					<th width="10%">No.</th>
+					<th width="20%">Time</th>
+					<th width="70%">Content</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>7:30</td>
+					<td style="text-align:left;">Breakfast </td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>8:00-2nd day’s afternoon 14:00</td>
+					<td style="text-align:left;">The buyers will go to Ruijin Republic Cradle Tourist Area (5A Level) to travel and will stay at the hotel in the tourist area for one night.</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>14:00</td>
+					<td style="text-align:left;">The buyers will go back to Guangzhou by bus.</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
+
+	<div id="table2" class="table2 table_style">
+	
+		<p>1、At the afternoon of July 17th,the global buyers will be arrive in Linyi city,stay in the Heyi Hotel(4 star),and have dinner in hotel at night.</p>
+		<p>2、At 9:00-12:00 of July 18th to 19th,the buyers will attend the High-end Business Matching Event.</p>
+		<table class="uk-table">
+			<thead>
+				<tr>
+					<th width="10%">No.</th>
+					<th width="20%">Time</th>
+					<th width="70%">Content</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>8:00</td>
+					<td style="text-align:left;">Breakfast</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>8:30</td>
+					<td align="left">The buyers will go to Linyi Trade City Engineering Material Market by bus.</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>9:00-11:00</td>
+					<td style="text-align:left;">
+						The buyers and suppliers will attend the Business Event<br/>
+						Contents<br/>
+						The leader will make a welcome speech;<br/>
+						The representatives of suppliers will  introduce their products(3-5 suppliers, 5 minutes for each);<br/>
+						The suppliers communicate with buyers about business;<br/>
+						Calculate the number of pre-orders,announce pre-orders  and take photos.<br/>
+					</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>11:30</td>
+					<td style="text-align:left;">
+						The buyers return to the hotel by bus and have lunch.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>3、At 2PM to 5:30 PM of July 18th to July 19th,the buyers will visit Wholesale Market and Shops inside.</p>
+
+		<table class="uk-table">
+			<thead>
+				<tr>
+					<th width="10%">No.</th>
+					<th width="20%">Time</th>
+					<th width="70%">Content</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>14:00-17：30</td>
+					<td style="text-align:left;">
+						The buyers will visit the wholesale markets with professional translators.<br/>
+						Contents:<br/>
+						The buyers will be in groups depending on their purchasing requests;<br/>
+						The buyers visit the shops in wholesale markets;<br/>
+						The buyers could use Mr-World APP to get products information and suppliers information easily from shops with QR Codes.<br/>
+						The buyers will take photos together.
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>17:30</td>
+					<td style="text-align:left;">
+						The buyers will go back to hotel by bus and have dinner in hotel.
+					</td>
+				</tr>
+			</tbody> 
+		</table>
+		<p>4、on July 20 to July 21st,the buyers will have a travel in Linyi City.</p>
+
+		<table class="uk-table">
+			<thead>
+				<tr>
+					<th width="10%">No.</th>
+					<th width="20%">Time</th>
+					<th width="70%">Content</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>7:30</td>
+					<td style="text-align:left;">Breakfast</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>8:00-2nd day’s afternoon</td>
+					<td style="text-align:left;">The buyers will go to Yimeng Mountain Tourist Area (5A Level) to travel and will stay at the hotel in the tourist area for one night.</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>14:00</td>
+					<td style="text-align:left;">The buyers will go back to hotel by bus.</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>5、On July 22nd,the buyers will go back to Guangzhou by bus.</p>
+	</div>
+
+
+</div>
+
+<% include ../components/footer-en.html %>
+<% include ../block/js.html %>
+<script>
+	var logoText = '<%= logoText %>';
+	
+</script>
+<script src="<%= assetsPath %>/cms/js/activity-forecast/activity-forecast.js"></script>
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!--首页-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= config.title %></title>
+
+  <% include ./block/head.html %>
+
+  <link rel="stylesheet" href="<%= assetsPath %>/cms/css/index.css">
+
+</head>
+<body>
+
+  <% include ./components/header.html %>
+ <div class="uk-container uk-container-center">
+  <div class="index-banner">
+
+   <div class="slideBox" id="slideBox">
+        <div class="hd">
+          <ul>
+            <% ads.forEach(function(item, i){ %>
+            <li></li>
+            <% }) %>
+          </ul>
+        </div>
+        <div class="bd">
+          <ul>
+            <% ads.forEach(function(item, i){ %>
+            <li>
+              <a href="<%= item.link %>" target="_blank">
+                <img src="<%- resize(item.img, 1500, 360, 3) %>">
+              </a>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+      </div>
+
+  </div>
+  <div class="uk-flex index-tab">
+    <div class="item uk-width-1-3"><a href="#category"><i></i>Find Products & Suppliers</a></div>
+    <div class="item uk-width-1-3"><a href="/bcenter/order/buyerList.do" class="j-orderManage"><i></i>Manage Orders</a></div>
+    <div class="item uk-width-1-3"><a href="/protect.html"><i></i>Buyer Protection</a></div>
+
+  </div>
+
+
+
+ </div>
+ <div class="uk-wrap">
+ <div class="uk-container uk-container-center">
+  <div class="index-block uk-clearfix">
+    <div class="uk-panel uk-width-1-3 cate-block">
+      <h3 class="uk-panel-title"><i class=""></i><a href="/category.html" id="category">Categories</a></h3>
+     <div class="uk-panel-body">
+      <ul class="index-left-nav clearfix">
+
+        <% categorys.forEach(function(items, i){ %>
+         <% if(i > 5) return %>
+        <li class="cm-menu-item">
+          <a href="<%= items.link %>" class="ca">
+            <%= items.name %>
+          </a>
+          <div class="index-more-nav util-clearfix">
+            <% items.children.forEach(function(item,i) {
+              if(i > 3) return;
+            %>
+        <div class="index-more-nav-list">
+        <dl class="clearfix">
+              <dd>
+                <a href="<%= item.link %>"><%=  item.name  %></a>
+              </dd>
+              <% item.children.forEach(function(menu,j) { 
+        if(j > 5 ) return;
+        %>
+              <dt>
+                <a href="<%=  menu.link  %>"><%=  menu.name  %></a>
+              </dt>
+              <% }) %>
+        </dl>
+        </div>
+            <% }) %>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+
+    
+      <div class="more uk-text-right"><a href="/category.html">See All>></a></div>
+     </div>
+
+      </div>
+
+      <div class="uk-panel uk-width-1-3 advSearch-block">
+        <h3 class="uk-panel-title"><i class=""></i><a href="">Advanced Search</a> <span>Get Sourcing Assistance</span></h3>
+     <div class="uk-panel-body">
+      <p>Contact Mr-World Customer Service</p>
+      <img src="<%= assetsPath %>/global/images/banner-01.jpg">
+      <div class="search-item uk-margin-top">
+        <span>Search by Industrial Cluster</span><button class="uk-button">search</button>
+        <div id="j-search-banner">
+          <ul>
+            <li><a href="/industrial.html"><img src="<%= assetsPath %>/global/images/banner-02.jpg"></a></li>
+            
+          </ul>
+        </div>
+        
+      </div>
+
+     </div>
+
+      </div>
+
+
+      <div class="uk-panel uk-width-1-3 fast-shipping">
+     <h3 class="uk-panel-title"><i class=""></i><a href="/fastshipindex.html">Fast Shipping</a><span>Buy Online Quickly</span></h3>
+     <div class="uk-panel-body">
+
+<ul>
+        <% fastShipcate.forEach(function(item, i){ if(i > 3) return;%>
+        <li><a href="<%= item.link %>"><img src="<%- resize(item.img, 42, 42, 3) %>"><%- substr(item.name, 42) %></a></li>
+
+          <% }) %>
+
+        
+        
+
+      </ul>
+
+      <div class="more uk-margin-top uk-text-right"><a href="/fastshipindex.html">See All>></a></div>
+
+     
+      
+     </div>
+
+      </div>
+
+       </div>
+
+
+       <div class="index-block uk-margin-top uk-clearfix">
+
+           <div class="uk-panel uk-width-1-3 special-offers">
+                <h3 class="uk-panel-title"><i class=""></i><a href="/special.html" target="_blank">Special Offers</a><span>Make Bargains at Lowest Prices</span></h3>
+                <div class="uk-panel-body uk-clearfix">
+               
+                 <% specialProduct.forEach(function(item, i){ %>
+                    <% if(i > 1) return %>
+                  <div class="item">
+                    <%  if(item.sld) { %>
+                    <a href="//<%=item.sld %>.shop.<%= domain_url %><%- prodUrl(item.name, item.number) %>" class="prod-img" ><img src="<%- resize(item.img, 160, 160, 3) %>" title="<%= item.name %>"></a>
+
+
+                    <% }else{ %>
+
+                     <a href="<%- prodUrl(item.name, item.number) %>" class="prod-img" ><img src="<%- resize(item.img, 160, 160, 3) %>" title="<%= item.name %>"></a>
+                    <% }%>
+                    <div class="prod-info">
+                    <span class="prod-name">
+                   <%  if(item.sld) { %>
+                    
+                    <a href="//<%=item.sld %>.shop.<%= domain_url %><%- prodUrl(item.name, item.number) %>" title="<%= item.name %>"><%- substr(item.name, 20) %></a>
+
+                    <% }else{ %>
+
+                    <a href="<%- prodUrl(item.name, item.number) %>" title="<%= item.name %>"><%- substr(item.name, 20) %></a>
+                    <% }%>
+                    
+
+                    </span>
+                      <span class="prod-price">US $ <%= item.discountPrice %></span>
+                      <span class="prod-market-price">US $ <%= item.price %></span>
+                      <span class="other"><i></i><%= item.tag %></span>
+                      <input type="hidden" value="" class="endTime">
+                    </div>
+                  </div>
+               <%  if(i==1) { return }%>
+                  <span class="line"></span>
+
+             
+               <% }) %>
+
+
+                
+
+ 
+                </div>
+                <div class="bottom-box uk-clearfix uk-margin-top">
+                  <div  class="time j-time"><i class="uk-icon-clock-o"></i>
+                  <span><span class="day">00</span>d</span>
+                 <span><span class="hour">00</span>h</span>
+                 <span><span class="minute">00</span>m</span>
+                 <span><span class="second">00</span>s</span>
+                </div >
+
+
+                
+                  <input type="hidden" name="time" value="">
+                     <div class="more uk-text-right"><a href="/special.html">See All>></a></div>
+              </div>
+           </div>
+
+            <div class="uk-panel uk-width-1-3 innovatioi-design">
+                <h3 class="uk-panel-title"><i class=""></i><a href="/innovative.html">Innovation & Design</a><span>See Newest Product Developments</span></h3>
+                <div class="uk-panel-body">
+
+                 <% innovativePro.forEach(function(item, i){ %>
+                 <%  if(i == 0) { %>
+
+                  <div class="l-info">
+                   <%  if(item.sld) { %>
+                    <a href="//<%=item.sld %>.shop.<%= domain_url %>/product/<%- prodUrl(item.name, item.id) %>" class="prod-img" title="<%= item.name %>"><img src="<%- resize(item.img, 160, 160, 3) %>"></a>
+                    
+                  <% }else{ %>
+
+                    <!-- <a href="/product/<%=item.id%>.html" class="prod-img" title="<%= item.name %>"><img src="<%- resize(item.img, 200, 200, 3) %>"></a> -->
+
+                    <a href="<%- prodUrl(item.name, item.id) %>" class="prod-img" title="<%= item.name %>"><img src="<%- resize(item.img, 160, 160, 3) %>"></a>
+
+                   <% }%>
+
+                    <div class="prod-info">
+                      <span class="prod-name">
+                       <%  if(item.sld) { %>
+
+                    <a href="//<%=item.sld %>.shop.<%= domain_url %>/product/<%- prodUrl(item.name, item.id) %>" title="<%= item.name %>"><%- substr(item.name, 20) %></a>
+                     <% }else{ %>
+  
+                    <a href="<%- prodUrl(item.name, item.id) %>" title="<%= item.name %>"><%- substr(item.name, 20) %></a>
+                     <% }%>
+
+                    
+                      </span>
+                      <span class="prod-price">US $ <%= item.priceRange %></span>
+                      <span class="prod-min-order">Min.Order <%= item.minOrder %> Piece</span>
+                     
+                    </div>
+                  </div>
+                 <% } %>
+
+                  <%  if(i > 0) { %>
+                     <div class="r-info">
+                    <div class="prod-info uk-clearfix">
+                      <span class="prod-name">
+
+                       <%  if(item.sld) { %>
+
+                    <a href="//<%=item.sld %>.shop.<%= domain_url %>/product/<%- prodUrl(item.name, item.id) %>" class="prod-img" title="<%= item.name %>"><%- substr(item.name,22) %></a>
+                     <% }else{ %>
+
+                        <a href="<%- prodUrl(item.name, item.id) %>" class="prod-img" title="<%= item.name %>"><%- substr(item.name, 22) %></a>
+
+                   
+                     <% }%>
+
+                     
+
+                      </span>
+                      <span class="prod-price">US $ <%= item.priceRange %></span>
+                      <!-- <span class="prod-min-order">Min.order <%= item.minOrder %> piece</span> -->
+
+                        <%  if(item.sld) { %>
+                    <a href="//<%=item.sld %>.shop.<%= domain_url %>/product/<%- prodUrl(item.name, item.id) %>" title="<%= item.name %>" class="prod-img"><img src="<%- resize(item.img, 75, 75, 3) %>" title="<%= item.name %>"></a>
+                     <% }else{ %>
+                <a href="<%- prodUrl(item.name, item.id) %>" class="prod-img"><img src="<%- resize(item.img, 75, 75, 3) %>" title="<%= item.name %>"></a>
+                <!-- <a href="/product/<%=item.id%>.html" class="prod-img"><img src="<%- resize(item.img, 75, 75, 2) %>" title="<%= item.name %>"></a> -->
+                    
+                     <% }%>
+
+                     
+                      
+                    </div>
+                     </div>
+                   <% } %>
+          
+               <% }) %>
+
+
+
+                
+                  
+                  <div class="uk-clearfix"></div>
+                  
+                </div>
+<div class="more uk-margin-top uk-text-right"><a href="/innovative.html">See All>></a></div>
+           </div>
+
+            <div class="uk-panel uk-width-1-3 selected-seller">
+                <h3 class="uk-panel-title"><i class=""></i><a href="/search/product.do?keyword=clothes">Selected Suppliers</a><span>Choose Suppliers By Qualification</span></h3>
+                <div class="uk-panel-body uk-grid">
+                  <div class="item uk-width-1-2"><img src="<%= assetsPath %>/global/images/cert-1.jpg"></div>
+                  <div class="item uk-width-1-2"><img src="<%= assetsPath %>/global/images/cert-2.jpg"></div>
+                  <div class="item uk-width-1-2"><img src="<%= assetsPath %>/global/images/cert-3.jpg"></div>
+                  <div class="item uk-width-1-2"><img src="<%= assetsPath %>/global/images/cert-4.jpg"></div>
+                </div>
+<div class="more uk-margin-top uk-text-right"><a href="/search/product.do?keyword=clothes">See All>></a></div>
+           </div>
+
+
+       </div>
+
+
+    <%  if(industrys.length > 0) { %>
+        <div class="index-block uk-margin-top zyz-block uk-clearfix">
+        <h3 class="uk-panel-title"><a href="/industrial.html" target="_blank">Industrial Cluster</a> <span class="uk-float-right more"><a href="/industrial.html">See All>></a></span></h3>
+         <div class="uk-panel-body uk-flex" id="zyzList">
+           <%  if(industrys.length > 3) { %>
+             <div class="hd">
+             <a class="next"><i class="uk-icon-angle-left"></i></a>
+            <a class="prev"><i class="uk-icon-angle-right"></i></a>
+          </div>
+          <% } %>
+          <div class="bd">
+          <ul>
+           <% industrys.forEach(function(item, i){ %>
+
+         <li class="item"><a href="/industrial/<%= item.iwId %>.html"><img src="<%- resize(item.searchImage, 484, 309, 3) %>"></a>
+          <div class="info">
+            <p><%= item.nameEn %></p>
+            <span><i></i><%= item.cityName %>,<%= item.provinceName %>,<%= item.countryName %></span>
+          </div>
+          </li>
+
+          <% }) %>
+          </ul>
+        </div>
+        
+        </div>
+
+        </div>
+       <% } %>
+
+
+        <div class="index-block uk-margin-top">
+           
+        <div class="slideAdv" id="slideAdv">
+        <div class="hd">
+          <ul>
+           
+            <li></li>
+              <li></li>
+                <li></li>
+          
+          </ul>
+        </div>
+        <div class="bd">
+          <ul>
+           
+            <li>
+              <a href="javascript:;">
+                <img src="<%= assetsPath %>/global/images/col-banner1.jpg">
+              </a>
+            </li>
+
+              <li>
+              <a href="http://www.mr-world.com/industrial/124.html">
+                <img src="<%= assetsPath %>/global/images/col-banner3.jpg">
+              </a>
+            </li>
+         
+
+             <li>
+              <a href="javascript:;">
+                <img src="<%= assetsPath %>/global/images/col-banner2.jpg">
+              </a>
+            </li>
+
+           
+          </ul>
+        </div>
+
+        <!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+      </div>
+
+
+      
+
+        </div> 
+
+         <div class="index-block uk-margin-top recom-prod">
+         <h3 class="uk-panel-title">Recommend Products</h3>
+         <div class="uk-panel-body uk-flex uk-clearfix">
+            <div class="item uk-width-1-3" id="side-baner">
+            <div class="hd">
+          <ul>
+           
+             <% products.forEach(function(item, i){ %>
+               <%  if(item.sortid == 1) { %>
+            <li></li>
+               <% } %>
+            <% }) %>
+          
+          </ul>
+        </div>
+         <div class="bd">
+                <ul>
+                 <% products.forEach(function(item, i){ %>
+                  <%  if(item.sortid == 1) { %>
+                  <li><a href="<%= item.link %>" title="<%= item.name %>" class="l-prodImg"><img src="<%- resize(item.img, 230, 230, 3) %>" title="<%= item.name %>"></a>
+
+
+               <span class="prodName">
+                    <a href="<%= item.link %>" title="<%= item.name %>"><%= substr(item.name, 35) %></a>
+                 </span>
+                  <span class="prodDesc">
+                    <a href="<%= item.link %>" title="<%= item.name %>"> <%= substr(item.desc, 50) %> </a>
+                 </span>
+                  </li>
+                  <% } %>
+
+               <% }) %>
+                   
+                </ul>
+              </div>
+              
+            </div>
+             <div class="item uk-width-2-3 uk-flex">
+             <ul class="uk-width-1-1 uk-clearfix">
+
+              <% products.forEach(function(item, i){ %>
+             
+                 <%  if(item.sortid == 2) { %>
+
+                  <% if(i > 5) return %>
+                  <li class="uk-width-1-2 uk-float-left">
+                 <div class="uk-float-left prodImg">
+                 <a href="<%= item.link %>" title="<%= item.name %>"><img src="<%- resize(item.img, 120, 120, 3) %>"></a>
+                
+
+                 </div>
+                   
+                   <div class="uk-float-right prodInfo">
+                  <span class="prodName">
+                    <a href="<%= item.link %>" title="<%= item.name %>"> <%= substr(item.name, 25) %> </a>
+                 </span>
+                  <span class="prodDesc">
+                   <a href="<%= item.link %>" title="<%= item.name %>"><%= substr(item.desc, 35) %></a>
+                      
+                 </span>
+
+                  <span class="prodPrice">
+                  <%= item.price %> <em> / Piece</em>
+                 </span>
+
+               </div>
+
+                  </li>
+                  <% } %>
+
+               
+               <% }) %>
+
+             </ul>
+               
+             </div>
+             <!--  <div class="item uk-width-1-3">
+              <div class="top-sbanner uk-flex">
+               <% products.forEach(function(item, i){ %>
+                 <%  if(item.sortid == 4) { %>
+                 <div class="sbanner"><a href="<%= item.link %>"><img src="<%- resize(item.img, 249, 158, 3) %>"></a></div>
+                  <% } %>
+
+                   <%  if(item.sortid == 5) { %>
+                 <div class="sbanner"><a href="<%= item.link %>"><img src="<%- resize(item.img, 249, 158, 3) %>"></a></div>
+                  <% } %>
+
+               <% }) %>
+
+              
+                 
+              </div>
+              <div class="bottom-sbanner">
+               <% products.forEach(function(item, i){ %>
+                 <%  if(item.sortid == 6) { %>
+                  <a href="<%= item.link %>"><img src="<%- resize(item.img, 500, 161, 3) %>"></a>
+                  <% } %>
+
+               <% }) %>
+             
+              </div>
+              </div> -->
+         </div>
+
+         </div> 
+
+         <div class="uk-margin-top activities uk-clearfix">
+          <h3 class="uk-panel-title">Activities</h3>
+          <div class="uk-flex">
+
+           <% homeActs.forEach(function(item, i){ %>
+            <div class="uk-panel uk-width-1-5"><a href="<%= item.link %>" target="_blank"><img src="<%- resize(item.img, 272, 173, 3) %>"></a>
+          <div class="info">
+              <span><a href="<%= item.link %>" target="_blank" title="<%= item.name %>"><%- substr(item.name, 70) %></a></span>
+              <span><i class="uk-icon-clock-o"></i><%- subTime(item.startTime) %> ~ <%- subTime(item.endTime) %></span>
+          </div>
+          </div>
+           <% }) %>
+      
+         
+         
+         
+
+          </div>
+             
+
+         </div>
+
+
+         <div class="index-block uk-margin-top other-block">
+             <div class="uk-panel-body  uk-clearfix">
+               <div class="item uk-width-1-3">
+                 <a href="/business_match.html"><i class="icon"></i></a>
+                 <h4><a href="/business_match.html">Business Matching</a></h4>
+               <p><a href="/business_match.html">Provide a wide range of contact channel for buyers and suppliers, faster and more efficient.</a></p>
+               <div class="more"><a href="/business_match.html">learn more</a></div>
+               </div>
+
+               <div class="item uk-width-1-3">
+                 <a href="/cms/escrow.html"><i class="icon"></i></a>
+                 <h4><a href="/cms/escrow.html">Escrow</a></h4>
+                 <p><a href="/cms/escrow.html">Ensuring fund security for buyers and suppliers, make every transaction without risk.</a></p>
+               <div class="more"><a href="/cms/escrow.html">learn more</a></div>
+               </div>
+
+               <div class="item uk-width-1-3">
+                <a href="/inspection_service.html"><i class="icon"></i></a>
+               <h4><a href="/inspection_service.html">Inspection Service</a></h4>
+               <p><a href="/inspection_service.html">The inspecter will help to inspect the products and provide an inspection report for you.</a></p>
+               <div class="more"><a href="/inspection_service.html">learn more</a></div>
+               </div>
+
+             </div>
+     </div>
+
+  </div>
+  
+
+ </div>
+  
+    
+
+  
+  <% include ./components/footer-en.html %>
+  <% include ./block/js.html %>
+   <script src="<%= assetsPath %>/cms/js/index.js"></script>
+
+</body>
+</html>
+

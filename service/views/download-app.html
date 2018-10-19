@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ./block/head.html %>
+	<link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/download_app.css">
+</head>
+<body>
+	<% include ./components/header-two.html %>
+	 
+<div class="outer-wrapper">
+
+<div class="banner">
+	<div class="inner">
+		<h1>Mr-World APP</h1>
+		<h2>Let Global Commodity Trade Worldwild</h2>
+		<img src="http://static.mr-world.com/global/images/qrcode.png" alt="" />
+		<p class="txt">Scan to download the app Easy procurement source</p>
+		<div class="who">
+			<p class="buyer"><a class="active" href="/cms/download-app.html">buyer</a></p>
+			<p class="seller"><a href="/cms/download-app-seller.html">卖家</a></p>
+			<div class="line"></div>
+		</div>
+	</div>
+</div>
+
+<div class="uk-container uk-container-center features">
+
+	<h3 class="features-title">Features</h3>
+	<div class="features-bg"></div>
+	<div class="features-banner">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="<%= assetsPath %>/global/images/cms/download_app/phone1.png" alt="">
+					<span>Directly communicate with suppliers through the messenger syste.</span>
+				</div>
+				<div class="swiper-slide">
+					<img src="<%= assetsPath %>/global/images/cms/download_app/phone2.png" alt="">
+					<span>Real time translation, simultaneous interpretation ,break through language barriers.</span>
+				</div>
+				<div class="swiper-slide">
+					<img src="<%= assetsPath %>/global/images/cms/download_app/phone3.png" alt="">
+					<span>Secure, organized and reliable mobile platform.</span>
+				</div>
+			</div>
+			<div class="swiper-prev"><i class="uk-icon-chevron-left"></i></div>
+			<div class="swiper-next"><i class="uk-icon-chevron-right"></i></div>
+		</div>
+	</div>
+ 
+</div>
+
+<div class="info">
+	<div class="img_wrap"><img width="150" height="150" src="<%= assetsPath %>/global/images/cms/download_app/info-logo.png" alt="" /></div>
+	<p class="info_txt">The Mr-world.com app is a leading wholesale mobile marketplace for global trade.</p>
+	<p class="info_txt">Buy products from suppliers around the world, all from the convenience of your mobile device.</p>
+	<ul class="detail uk-clearfix">
+		<li class="uk-float-left">
+			<img src="<%= assetsPath %>/global/images/cms/download_app/detail-bg1.png" alt="" />
+			<h6>Business Matching</h6>
+			<p>Provide a wide range of contact channel for buyers and suppliers, faster and more efficient.</p>
+		</li>
+		<li class="uk-float-left">
+			<img src="<%= assetsPath %>/global/images/cms/download_app/detail-bg2.png" alt="" />
+			<h6>Escrow</h6>
+			<p>Ensuring fund security for buyers and suppliers, make every transaction without risk.</p>
+		</li>
+		<li class="uk-float-left">
+			<img src="<%= assetsPath %>/global/images/cms/download_app/detail-bg3.png" alt="" />
+			<h6>Inspection Service</h6>
+			<p>The inspecter will help to inspect the products and provide an inspection report for you.</p>
+		</li>
+	</ul>
+</div>
+
+</div>
+
+	<% include ./components/footer-en.html %>
+	<% include ./block/js.html %>
+	<script type="text/javascript" src="<%= assetsPath %>/cms/js/download_app.js"></script>
+
+</body>
+</html>

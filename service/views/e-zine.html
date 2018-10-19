@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ./block/head.html %>
+	<link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/ezine.css">
+</head>
+<body bgcolor="#f2f2f2">
+	<% include ./components/header.html %>
+	<div class="uk-container-center">
+		<div class="banner-module">
+			<div class="big-banner">
+				<% if(ads.length){ %>  
+				<div class="fullSlide">
+					<div class="bd"> 
+						<ul>  
+							<% ads.forEach(function(single){ %>  
+							<li ><a href="<%= single.link%>"><img src="<%- resize(single.img, 1900, 480, 3) %>"></a></li>
+							<% }) %>  
+						</ul>  
+					</div>
+					<% if(ads.length>1){ %>  
+					<div class="hd">
+						<ul class="uk-flex round">
+							<% ads.forEach(function(item, i){ %>
+							<li></li>
+							<% }) %>
+						</ul>
+					</div>
+					<% }%> 
+				</div>
+				<% } %>
+			</div>
+			<div class="uk-container-center uk-container recommend-banner">
+				<div class="rotate j-silde">
+					<div class="hd">
+						<button class="prev uk-icon-angle-right"></button>
+						<button class="next uk-icon-angle-left"></button>
+					</div>
+					<div class="bd">
+						<ul class="uk-clearfix">
+							<% recommend.forEach(function(item,i){%>
+							<li class="uk-float-left"><a href="<%= item.link %>"><img src="<%- resize(item.img,480,355,3) %>"></a></li>
+							<%}) %>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="uk-container uk-container-center uk-margin-top data-list-module">
+			<nav class="uk-navbar">
+				<ul class="uk-navbar-nav j-ezine-nav">
+					<li class="uk-parent uk-active"><a href="javascript:;" data-type="category">Categories E-zine</a></li>
+					<li class="uk-parent"><a href="javascript:;" data-type="industrial">Industial Cluster E-zine</a></li>
+					<li class="uk-parent"><a href="javascript:;" data-type="compony">Company E-zine</a></li>
+				</ul>
+			</nav>
+			<!-- categorys -->
+			<div class="cate-ezine category ezine">
+				<table class="uk-table cate-ii-nav">
+					<tbody>
+						<tr>
+							<td class="j-cate cate-active" data-parentid="null">
+								<a href="javascript:;"><i class="uk-icon-list-ul icon-img"></i><span class="decs">All</span></a>
+							</td>
+							<% ezcate.forEach(function(item,index){ %>
+							<td class="j-cate" data-parentid="<%= item._id %>">
+								<a href="javascript:;"><img class="icon-img" src="<%- resize(item.iconImg,28,28,3) %>"><span class="decs"><%= item.name %></span></a>
+							</td>
+							<% }) %>
+						</tr>
+					</tbody>
+				</table>
+				<ul class="cate-data uk-clearfix"></ul>
+			</div>
+			<!-- industrial -->
+			<div class="industrial-ezine industrial ezine options">
+				<form class="uk-clearfix" id="clusterForm">
+					<div class="uk-float-left addr-select">
+						<p class="uk-text-left uk-float-left addr-describe"><span>Location:</span></p>
+						<select name="clusterProvince" id="clusterProvince" v-model="provinceId">
+							<option value="">Please select</option>
+							<option v-for="item in provinceList" :value="item.id">{{item.name}}</option>
+						</select>
+						<select name="clusterDistrict" id="clusterDistrict" v-model="districtId">
+							<option value="">Please select</option>
+							<option v-for="item in cityLIst" :value="item.id">{{item.name}}</option>
+						</select>
+					</div>
+					<div class="uk-float-left cluster-type">
+						<span>Type:</span>
+						<input type="radio" name="cluster" id="clusterAll" value="0" v-model="clusterType">
+						<label for="clusterAll">All</label>&nbsp;&nbsp;&nbsp;
+                    	<input type="radio" name="cluster" id="clusterTown" value="1" v-model="clusterType">
+                    	<label for="clusterTown">Industrial Cluster</label>&nbsp;&nbsp;&nbsp;
+                    	<input type="radio" name="cluster" id="clusterWH" value="2" v-model="clusterType">
+                    	<label for="clusterWH">Wholesale Market</label>
+                    </div>
+				</form>
+				<ul class="cluster-data uk-clearfix"></ul>
+				<div class="clusterPager uk-text-right uk-margin-top" id="clusterPager"></div>
+			</div>
+			<!-- compony -->
+			<div class="compony-ezine compony ezine options">
+				<ul class="uk-clearfix compony-ii-nav">
+					<% compony.forEach(function(item,index) { %>
+					<% if(index==0) { %>
+					<li class="uk-float-left uk-text-center ii-nav-active" data-parentid="<%= item._id %>">
+						<a href="javascript:;"><img src="<%- resize(item.iconImg,25,25,3) %>"><%= item.name %></a>
+					</li>
+					<% }else { %>
+					<li class="uk-float-left uk-text-center" data-parentid="<%= item._id %>">
+						<a href="javascript:;"><img src="<%- resize(item.iconImg,25,25,3) %>"><%= item.name %></a>
+					</li>
+					<% } %>
+					<% }) %>
+				</ul>
+				<div class="options uk-margin-top">
+					<form class="uk-clearfix" id="companyForm">
+						<div class="uk-float-left addr-select">
+							<p class="uk-text-left uk-float-left addr-describe"><span>Location:</span></p>
+							<select name="companyProvince" id="companyProvince" v-model="provinceId">
+								<option value="">Please select</option>
+								<option v-for="item in provinceList" :value="item.id">{{item.name}}</option>
+							</select>
+							<select name="companyDistrict" id="companyDistrict" v-model="districtId">
+								<option value="">Please select</option>
+								<option v-for="item in cityLIst" :value="item.id">{{item.name}}</option>
+							</select>
+						</div>
+						<div class="uk-float-left cluster-type">
+							<span>Type:</span>
+							<input type="radio" name="company" id="companyAll" value="0" v-model="clusterType">
+							<label for="companyAll">All</label>&nbsp;&nbsp;&nbsp;
+                	    	<input type="radio" name="company" id="companyTown" value="1" v-model="clusterType">
+                	    	<label for="companyTown">Industrial Cluster</label>&nbsp;&nbsp;&nbsp;
+                	    	<input type="radio" name="company" id="companyWH" value="2" v-model="clusterType">
+                	    	<label for="companyWH">Wholesale Market</label>
+                	    </div>
+					</form>
+				</div>
+				<ul class="uk-clearfix compony-list"></ul>
+				<div class="pager uk-text-right uk-margin-top" id="companyPager"></div>
+			</div>
+		</div>
+	</div>
+	<% include ./components/footer-en.html %>
+	<% include ./block/js.html %>
+	<script type="text/javascript" src="<%= assetsPath %>/cms/js/ezine.js"></script>
+
+</body>
+</html>

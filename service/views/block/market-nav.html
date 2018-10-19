@@ -1,0 +1,25 @@
+<nav class="uk-navbar">
+  <ul class="uk-container uk-container-center uk-clearfix">
+    <li class="uk-float-left">
+      <a href="/market/<%= iwId %>/index.html" <% if (/index/.test(path)) {%>class="active"<% } %>>Home </a>
+    </li>
+    <li class="uk-float-left"><a href="/market/<%= iwId %>/0/products.html"
+      <% if (/products/.test(path)) {%> class="active" <% } %>
+      >Products</a>
+    </li>
+    <li class="uk-float-left">
+      <a href="/market/<%= iwId %>/activity.html"
+        <% if (/activity/.test(path)) { %> class="active" <% } %>
+        >Activities</a>
+      </li>
+      <li class="uk-float-left">
+        <a href="/market/<%= iwId %>/introduce.html"
+          <% if (/introduce/.test(path)) {%> class="active" <% } %>
+          >Industry introduction</a>
+        </li>
+      </ul>
+    </nav>
+
+
+
+

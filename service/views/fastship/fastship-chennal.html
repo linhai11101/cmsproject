@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../block/head.html %>
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/fastship/fastship-chennal.css">
+</head>
+<body bgcolor="#f2f2f2">
+	<% include ../components/header-en.html %>
+	<div class="channel-banner">
+	    <% if(ads.length != 0){ %>
+		<a href="<%= ads[0].link %>">
+
+			<img src="<%- resize(ads[0].img,1920,360,3) %>">
+		</a>
+		<% } %>
+	</div>
+	<div class="uk-container uk-container-center">
+		<div class="uk-container uk-panel">
+			<% if(type == 1) { %>
+				<h1 class="hot"><%= title %></h1>
+			<% } %>
+			<% if(type == 2) { %>
+				<h1 class="low"><%= title %></h1>
+			<% } %>
+			<% if(type == 3) { %>
+				<h1 class="sample"><%= title %></h1>
+			<% } %>
+			<ul class="uk-clearfix">
+				<% base.forEach(function(item,i) { %>
+					<% if(i == 0) { %>
+						<li class="uk-active j-switch uk-float-left"><a href="javascript:;" data-id="<%= item._id %>" title="<%= item.name %>"><%= item.name %></a></li>
+					<% }else{ %>
+						<li class="j-switch uk-float-left"><a href="javascript:;" data-id="<%= item._id %>" title="<%= item.name %>"><%= item.name %></a></li>
+					<% } %>
+				<% }) %>
+			</ul>
+		</div>
+		<ul class="uk-container product-list">	
+		</ul>
+		<div id="pager" class="pager uk-text-right"></div>
+		<div class="uk-container uk-container-center other-chennal">
+			<h3>
+				Other Channels You May Like
+			</h3>
+			<div>
+				<% moduls.forEach(function(item,i){%>
+					<a href="<%= item.link %>" class="uk-float-left">
+						<img src="<%- resize(item.img,358,215,3) %>">
+					</a>
+				<%}) %>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<% include ../components/footer-en.html %>
+
+        <% include ../block/js.html %>
+
+	<script>
+		var base = <%- JSON.stringify(base) %>;
+		var imgHost = 'http://img.mrworld.com/';
+		var logoText = '<%= logoText %>';
+	</script>
+	<script type="text/javascript" src="<%= assetsPath %>/cms/js/fastship/fastship-chennal.js"></script>
+</body>
+</html>

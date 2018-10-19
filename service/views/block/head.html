@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta type="title" content="<%= config.title %>">
+<meta type="keywords" content="<%= config.keywords %>">
+<meta type="description" content="<%= config.description %>">
+<meta name="baidu-site-verification" content="egPov5lsry" />
+<meta name="msvalidate.01" content="6830E5E5C2D5B084331D64A411B34874" />
+<%
+  var headers = config.site_headers || [];
+  for (var i = 0, l = headers.length; i < l; i++) {
+  %>
+  <%- headers[i] %>
+  <% } %>
+<link rel="shortcut icon" href="<%= assetsPath %>/favicon.ico" type="image/x-icon">
+<!-- Bootstrap样式 -->
+<link rel="stylesheet" href="<%= assetsPath %>/global/css/global.css">
+
+<!-- 加载头部底部-->

@@ -1,0 +1,129 @@
+<!--首页-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= config.title %></title>
+
+  <% include ./block/head.html %>
+
+  <link rel="stylesheet" href="<%= assetsPath %>/cms/css/special.css">
+
+</head>
+<body>
+
+  <% include ./components/header-en.html %>
+ <div class="uk-container-center uk-margin-small-top banner-box">
+  <div class="index-banner" id="specialBanner">
+  <div class="bd">
+   <ul>
+   
+     <% if(specialBanner.length != 0){ %>
+    <li class="item">
+        <a href="<%= specialBanner[0].link %>" target="_blank">
+        <img src="<%- resize(specialBanner[0].img,1920,360,2) %>" >
+        </a>
+      </li>
+     <% } %>
+    </ul>
+  </div>
+  </div>
+
+
+  <div class="index-tab">
+    <div class="uk-container uk-container-center j-special-cate">
+    <% specialCate.forEach(function(item, i){ %>
+      <% if(i == 8) return %>
+     <div class="item uk-width-1-6">
+        <a href="#<%- item.name %>">
+        <i><img src="<%- resize(item.img, 24, 24, 3) %>"></i>
+       <%- item.name %>
+        </a>
+      </div>
+      <% }) %>
+
+    </div>
+  </div>
+
+ </div>
+
+ <div class="uk-container uk-container-center" id="special-product">
+ 
+    <% specialProduct.forEach(function(floor, i){ %>
+    <div class="prodItem uk-panel uk-margin-top">
+      <div class="cateName" id="<%- floor.name %>"> <%- floor.name %> <a href="" class="uk-float-right" style="display: none">View more >></a></div>
+      <div class="uk-panel-body">
+      <% floor.products.forEach(function(item, i) { i%>
+      <% if(i == 12) return %>
+      <div class="item uk-width-1-4" >
+      
+          <div class="special-icon"> 
+            <% if(item.tag){%>
+          <h3><span><%= item.tag.slice(0,item.tag.length-3) %></span><span>OFF</span></h3>
+          <%}%>
+          </div>
+     
+         <!--  <i class="uk-icon-star-o"></i> -->
+        <%  if(item.sld) { %>
+           <a href="//<%=item.sld %>.shop.<%= domain_url %><%- prodUrl(item.name, item.number) %>" target="_blank">
+            <img src="<%- resize(item.img, 358, 360, 2) %>">
+          </a>
+
+          <% }else{ %>
+
+           <a href="<%- prodUrl(item.name, item.number) %>" target="_blank">
+            <img src="<%- resize(item.img, 358, 360, 2) %>">
+          </a>
+
+           <% }%> 
+          <div class="prodinfo">
+            <span class="prodName">
+
+           <%  if(item.sld) { %>
+           <a href="//<%=item.sld %>.shop.<%= domain_url %><%- prodUrl(item.name, item.number) %>">
+            <%= item.name %>
+          </a>
+
+          <% }else{ %>
+            <a href="<%- prodUrl(item.name, item.number) %>"><%= item.name %></a>
+
+           <% }%> 
+           
+
+            </span>
+          <div class="uk-clearfix"><span class="proddiscountPrice">US $ <%= item.discountPrice %> </span>&nbsp;
+         <!--  <span class="discountNum"><%- item.discount %>%<i>Off</i></span> --> </div>
+            <span class="prodPrice">US $ <%= item.price %></span>
+            <% if(item.free){ %>
+            <span class="button">Free Shipping</span>
+            <% } %>
+    <%  if(item.sld) { %>
+                <a href="//<%=item.sld %>.shop.<%= domain_url %><%- prodUrl(item.name, item.number) %>"   target="_blank" class="uk-button uk-button-primary j-btn-cart"></a>
+   <% }else{ %>
+   <a href="<%- prodUrl(item.name, item.number) %>" target="_blank" class="uk-button uk-button-primary j-btn-cart"></a>
+    <% }%> 
+          </div>
+      </div>
+       <% }) %>
+       </div>
+
+      </div>
+    <% }) %>
+    </div>      
+  <% include ./components/footer-en.html %>
+    <% include ./block/js.html %>
+    <% include ./components/back-top.html %>
+  <script type="text/javascript">
+    var  specialProduct = <%- JSON.stringify(specialProduct) %>;
+    var logotext = '<%= logoText %>';
+
+      
+  </script>
+  <script src="<%= assetsPath %>/cms/js/special.js"></script>
+ 
+
+
+</body>
+</html>

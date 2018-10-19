@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ./../block/head.html %>
+	<link href="<%= assetsPath %>/cms/css/industrial/main.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/town-products.css">
+</head>
+<body>
+	 <% include ../components/header-two.html %>
+	<% include ./../block/industrial-nav.html %> 
+	<div class="uk-container uk-margin-top uk-container-center" id="industrialProducts" v-clock>
+	<div class="uk-panel" v-if="isProducts">
+			 <form class="uk-form uk-form-horizontal">
+                <div class="nav">
+                <ul>
+                <li  @click="jPro" :class="isProducts?'active':''">Products <span v-show="productTotal">(<span class="j-pro-num" v-text="productTotal"></span>)</span></li>
+                <li  @click="jSup" :class="isProducts?'':'active'">Suppliers <span v-show="supplierTotal">(<span class="j-sup-num" v-text="supplierTotal"></span>)</span></li>
+                </ul>
+                </div>
+                <div class="uk-grid">
+                    <div class="uk-form-row price-search">
+                        <label class="uk-form-label">
+                            <span class="price-label">Price</span>
+                            <span class="sort">
+                            <a href="javascript:;" class="uk-icon-sort-up" :class="data.priceSort?'sortActive':''"  @click="sort(1)"></a>
+
+                            <a href="javascript:;" class="uk-icon-sort-down" :class="data.priceSort == false?'sortActive':''" @click="sort(2)"></a>
+                            </span>
+                        </label>
+                        <div class="uk-form-controls  price">
+                            <span class="j-price-all"  @click="search(1)">All</span>
+                            
+                            <input type="number" name="min-dollar" placeholder="$" id="min-dollar" v-model="data.minDollar" class="dollar">
+                            <span>-</span>
+                            <input type="number" name="max-dollar" id="max-dollar" placeholder="$" v-model="data.maxDollar" class="dollar">
+                            <button type="button" class="uk-button" @click="search">GO</button>
+                        </div>
+                    </div>
+                     <div class="uk-form-row unit-search">
+                        <label class="uk-form-label">
+                            M.O.Q:
+                        </label>
+                        <div class="uk-form-controls unit">
+                            <span class="j-supplierType-all" @click="unit(1)">All</span>
+                            <select name="" id=""  v-model="selected" @change="unit">
+                            <option value="1~50">1~50</option>
+                            <option value="50~100">50~100</option>
+                            <option value="100~500">100~500</option>
+                            <option value="500~1000">500~1000</option>
+                            <option value="Over 1000">Over 1000</option>
+                            </select>
+                            <span class="units">Units(s)</span>
+                          <!--   <button type="button" class="uk-button"  @click="search">GO</button> -->
+                        </div>
+                    </div>
+                    <div class="more" @click="show"><a href="javascript:;">more</a><span>+</span></div>
+                    
+                </div>
+                 <div class="uk-grid" v-if="otherFlag" v-cloak>
+                    <div class="uk-form-row uk-width-5-10 otherFlag">
+                        <label class="uk-form-label other-label">
+                            Others:
+                        </label>
+                        <div class="uk-form-controls type">
+                            <span class="j-wholesale-all" @click="other">All</span>
+                            <input type="checkbox" name="sample"  @click="sample($event)" ><label for="wholesale">Sample Offering</label>
+                            <input type="checkbox" name="sample"  @click="ship($event)"><label for="sample">Free Shipping</label>
+                        </div>
+                    </div>
+                    <div class="uk-form-row uk-width-5-10 search_keyword">
+                        <label class="uk-form-label other-label">
+                            Products:&nbsp; 
+                        </label>
+                        <input v-model="data.keyword" placeholder="please enter a keyword" type="text" />
+                        <button type="button" class="uk-button" @click="searchKeyword()">GO</button>
+                    </div>
+                </div>
+                
+            </form>
+		</div>
+		<div class="uk-panel" v-if="!isProducts">
+			 <form class="uk-form uk-form-horizontal">
+                <div class="nav">
+                <ul>
+                <li  @click="jPro" :class="isProducts?'active':''">Products <span v-show="productTotal">(<span class="j-pro-num" v-text="productTotal"></span>)</span></li>
+                <li  @click="jSup" :class="isProducts?'':'active'">Suppliers <span v-show="supplierTotal">(<span class="j-sup-num" v-text="supplierTotal"></span>)</span></li>
+                </ul>
+                </div>
+                <div class="uk-grid"  v-cloak>
+                    <div class="uk-form-row uk-width-5-10">
+                        <label class="uk-form-label other-label">
+                            Supplier Type:
+                        </label>
+                        <div class="uk-form-controls type">
+                            <span class="j-wholesale-all" @click="searchSupplier(0)">All</span>
+                        
+                            <ul id="vip">
+                            <li v-for="(item,index) in supplierType"> <input type="checkbox" name="supplier"  @click="searchSupplier(1)" :id="item.value"><label v-text="item.name"></label></li>
+                            
+                            </ul>
+                           
+                          <!--   <input type="checkbox" name="sample"  @click="ship($event)"><label for="sample">Free Shipping</label> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+		</div>
+		<ul class="uk-products-list" v-if="!isProducts">
+		
+			<li class="uk-block uk-flex" v-for="(item,index) in suppliersArr">
+				<div class="uk-block-left uk-flex">
+					<p>
+						 <a :href="'/shop/'+item.companyId+'.html'" v-if="item.companyLogo"><img :src="imgResize(item.companyLogo,120,120,3)" alt="" class="company-logo"></a>
+                                <a :href="'/shop/'+item.companyId+'.html'" v-else><img src="<%= assetsPath %>/global/images/company_default.png" alt="" class="company-logo"></a>
+					</p>
+					<div>
+						 <a :href="'/shop/'+item.companyId+'.html'"><p class="uk-title" v-text="item.companyEnName">
+						</p></a>
+						<p>
+							<span v-if="item.favorite"><i class="uk-icon-heart main-color" @click="collectSupplier($event,item.companyId)" ></i>Favorite</span>
+							<span v-if="!item.favorite"><i class="uk-icon-heart-o"  @click="collectSupplier($event,item.companyId)" ></i>Favorite</span>
+							<!-- <span><i class="uk-icon-envelope-o"></i>Contact us</span> -->
+							  <span><a href="javascript:;" class="uk-icon-envelope-o j-send-mail"  :data-index="index" :data-id="item.supplerId" :data-companyId="item.companyId" data-referId="21" :data-name="item.companyEnName"><span>Contact Supplier</span></a></span>
+
+						</p>
+						<ul class="supplier-msg">
+							<li><span>Business Rangs:</span><span v-text="item.mainCategory"></span></li>
+							<li><span>Main Products:</span><span v-text="item.mainProduct">_</span></li>
+							<li><span>Registered Capital:</span><span v-text="item.registeredFund"></span></li>
+							<li><span>Country / Region:</span><span v-text="item.location"></span></li>
+						</ul>
+					</div>
+				</div>
+
+				<ul class="uk-block-right uk-flex">
+					<li v-for="(val,idx) in item.relatedProducts">
+						<p><a :href="'/product/'+ val.productName.replace(/[^0-9a-zA-Z]/g,'-')+ '-' +val.productId+'.html'"><img :src="imgResize(val.productImg,165,165,3)" alt=""></a></p>
+						<p><a :href="'/product/'+ val.productName.replace(/[^0-9a-zA-Z]/g,'-')+ '-' +val.productId+'.html'" class="ellipsis-2 ellipsis-1" v-html="val.productName" :title="val.productName"></a></p>
+						<p class="uk-text-bold price" v-if="val.priceRange != '0.00'">US $<span v-text="val.priceRange"></span></p>
+						 
+					</li>
+					
+				</ul>
+			</li>
+		</ul>
+			 <p class="uk-block uk-align-center null" v-if="suppliersArr.length == 0 && !isProducts" style="text-align:center" v-cloak> No Suppliers</p>
+
+		<ul class="uk-margin-top uk-container uk-suppliers-lis uk-block-right" v-if="isProducts">
+			<li class="uk-float-left" v-for="(item,index) in productsArr">
+				<p><a :href="'http:/product/'+ item.productName.replace(/[^0-9a-zA-Z]/g,'-')+ '-' +item.productId+'.html'"><img :src="imgResize(item.productImg,165,165,3)" alt=""></a></p>
+				<p><a :href="'http:/product/'+ item.productName.replace(/[^0-9a-zA-Z]/g,'-')+ '-' +item.productId+'.html'" class="ellipsis-2 ellipsis-1" v-html="item.productName" :title="item.productName"></a></p>
+				<p class="uk-text-bold price" v-if="item.priceRange != '0.00'">US $<span v-text="item.priceRange"></span></p>
+				<!-- <del>USD $<span v-text="item.marketPriceRange"></span></del> -->
+			</li>
+			
+		</ul>
+		<p class="uk-block uk-align-center null" v-if="productsArr.length == 0 && isProducts" style="text-align:center" v-cloak> No Products</p>
+		<!-- <div class="pager uk-text-right" id="pager"></div> -->
+  <div class="float-block" v-if="category && category.length!=0">
+    <ul>
+      <li><a href="javascript:;" id="" @click="checkCate($event)"> All Category</a></li>
+        <li v-for="(single,index) in category"><a href="javascript:;" :id="single.cateId" v-text="single.name" @click="checkCate($event)"></a></li>
+      	<li><a href="">Top</a></li>
+    </ul>
+  </div>
+   <a href="#" id="back-top" class="back-top" ><i class="uk-icon-large uk-icon-angle-up"></i></a>
+	</div>
+
+	<% include ./../components/footer-en.html %>
+    <script >
+        var iwId = <%=  iwId %>;
+        var category = <%- JSON.stringify(category) %>;
+        var cateId = <%= cateId%>;
+        var type = "<%= type %>";
+    </script>
+  <% include ./../block/js.html %>
+	<script src="<%= assetsPath %>/cms/js/industrial/town-products.js"></script>
+
+ 
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!--Sample Center-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample Center - <%= config.title %></title>
+  <link rel="shortcut icon" href="<%= assetsPath %>/common/images/favicon.ico" type="image/x-icon">
+  <% include ./block/head.html %>
+
+  <!-- 样品中心样式 -->
+  <link rel="stylesheet" href="<%= assetsPath %>/sampleCenter/samplecenter.css">
+</head>
+<body>
+
+  <% include ./components/header.html %>
+  <% include ./components/main-nav.html %>
+  
+   <div class="samplecenterbanner">
+   <div class="main-slide" id="main-slide">
+   	<div class="hd">
+   	  <ul>
+   		<% ads.forEach(function(item, i){ %>
+		<% if (i > 2 ){ return }%>
+   		<li></li>
+   		<% }) %>
+   	  </ul>
+   	</div>
+   	<div class="bd">
+   	  <ul>
+   		<% ads.forEach(function(item, i){ %>
+		<% if (i > 2 ){ return }%>
+   		<li>
+   		  <a href="<%= item.link %>" target="_blank">
+   			<img data-src="<%= assetsPath %>/global/images/placeholder.png" src="<%- resize(item.img, 960, 410, 2) %>">
+   		  </a>
+   		</li>
+   		<% }) %>
+   	  </ul>
+   	</div>
+   
+   	<!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+   	<a class="prev" href="javascript:void(0)"></a>
+   	<a class="next" href="javascript:void(0)"></a>
+     </div>
+   </div>
+  
+  <div class="container">
+    <div class="navigator-top">
+      <a href="http://local.gdp.com/productDetail/detail/22396.cf" target="_blank" data-id="-1" class="nav-all-o j-menu active">ALL</a>
+      <span class="j-nav-container">
+        <% floors.forEach(function(floor, i) { %>
+          <% if (i == 1) { %>
+          <a href="javascript:;" data-id="<%= i %>" target="_blank" class="nav-type-c j-menu">
+            <span class="nav-icon icon1"></span>
+            <span class="nav-text"><%- floor.name.substr(0,22) %></span>
+          </a>
+          <% } %>
+          <% if (i == 2) { %>
+          <a href="javascript:;" data-id="<%= i %>" target="_blank" class="nav-type-h j-menu">
+            <span class="nav-icon icon2"></span>
+            <span class="nav-text"><%- floor.name.substr(0,22) %></span>
+          </a>
+          <% } %>
+          <% if (i == 3) { %>
+          <a href="javascript:;" data-id="<%= i %>" target="_blank" class="nav-type-b j-menu">
+            <span class="nav-icon icon3"></span>
+            <span class="nav-text"><%- floor.name.substr(0,30) %></span>
+          </a>
+          <% } %>
+          <% if (i == 4) { %>
+          <a href="javascript:;" data-id="<%= i %>" target="_blank" class="nav-type-l j-menu">
+            <span class="nav-icon icon4"></span>
+            <span class="nav-text"><%- floor.name.substr(0,18) %></span>
+          </a>
+          <% } %>
+        <% }) %>
+      </span>
+    </div>
+    <!--样品列表模块 START-->
+
+    <div class="j-floor-container">
+      <% floors.forEach(function(floor) { %>
+      <div class="product-list-title">
+        <span class="product-list-text"><%= floor.name %></span>
+      </div>
+      <div class="product-list-area">
+        <% floor.products.forEach(function(item, i) { i%>
+        <% if (i < 8) { %>
+          <% if ((i+4) % 4 == 0) { %>
+          <div class="product-list-area-u le">
+          <% } else { %>
+          <div class="product-list-area-u ri">
+          <% } %>
+            <div class="ima">
+              <a href="<%= item.link %>" target="_blank">
+                <img src="<%- resize(item.img, 257, 257, 2) %>" />
+              </a>
+            </div>
+            <div class="na">
+              <a href="<%= item.link %>" target="_blank"><%= item.name %></a>
+            </div>
+            <div class="pr">
+              <span class="fi">US $ <%= item.price %></span>
+              <span class="en">/ piece</span>
+            </div>
+            <div class="ic">
+              <div class="le">
+                <a href="<%= item.link %>" target="_blank">Get Samples</a>
+              </div>
+              <div class="ri">
+                <a href="javascript:;" class="fa j-like" data-id="<%= item._id %>">
+                  <span class="ic"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        <% } %>
+        <% }) %>
+      </div>
+      <% }) %>
+    </div>
+    <div class="j-floor-item"></div>
+  </div>
+  <% include ./components/footer.html %>
+  <script src="<%= assetsPath %>/index/index.js"></script>
+  <script>
+    var floors = <%- JSON.stringify(floors) %>;
+    require(['artTemplate', 'layer'], function(template, layer) {
+      $('.j-menu').on('click', function(event) {
+        event.preventDefault();
+        $('.j-menu').removeClass('active');
+        $(this).addClass('active')
+        var id = $(this).data('id');
+        if ( -1 == id) {
+          $('.j-floor-container').show();
+          $('.j-floor-item').hide();
+        } else {
+          var floorsData = floors[id];
+          var html = template('floorTemp', floorsData);
+          $('.j-floor-item').html(html).show();
+          $('.j-floor-container').hide();
+        }
+      });
+
+      $('body').on('click', '.j-like', function(event) {
+        var id = $(this).data('id');
+        $.ajax({
+          url: '/cms/api/sample/like/'+ id,
+          type: 'get'
+        })
+        .done(function(res) {
+          if(res.status == 1) {
+            layer.msg('点赞成功');
+          }
+        });
+      });
+    })
+  </script>
+  <script type="text/html" id="floorTemp">
+      <div class="product-list-title">
+        <span class="product-list-text">{{ name }}</span>
+      </div>
+      <div class="product-list-area">
+        {{ each products as item i  }}
+          {{ if ((i+4) % 4 == 0) }}
+          <div class="product-list-area-u le">
+          {{ else }}
+          <div class="product-list-area-u ri">
+          {{ /if }}
+            <div class="ima">
+              <a href="{{ item.link }}" target="_blank">
+                <img src="{{ item.img }}" />
+              </a>
+            </div>
+            <div class="na">
+              <a href="{{ item.link }}" target="_blank">{{ item.name }}</a>
+            </div>
+            <div class="pr">
+              <span class="fi">US $ {{ item.price }}</span>
+              <span class="en">/ piece</span>
+            </div>
+            <div class="ic">
+              <div class="le">
+                <a href="{{ item.link }}" target="_blank">Get Samples</a>
+              </div>
+              <div class="ri">
+                <a href="javascript:;" class="fa j-like" data-id="{{ item._id }}">
+                  <span class="ic"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        {{ /each }}
+      </div>
+  </script>
+  <script type="text/javascript" src="<%= assetsPath %>/sampleCenter/js/sample2.js"></script>
+</body>
+</html>

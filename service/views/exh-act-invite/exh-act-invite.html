@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../block/head.html %>
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/exh-act-invite.css">
+</head>
+<body>
+	<% include ../components/header-two.html %>
+	<div>
+		<div class="uk-container uk-container-center nav-block">
+			<div class="trade-rote rotate">
+				<div class="bd">
+              	  <ul class="uk-clearfix">
+              	  	  <% banner.forEach(function(item,index){ %>
+              	      <li class="uk-float-left"><a href="item.link" target="_blank"><img src="<%- resize(item.img,1200,390,3) %>"></a></li>
+              	      <% }) %>
+              	  </ul>
+              	</div>
+              	<div class="hd">
+              	  <ul class="uk-clearfix">
+              	  	<% banner.forEach(function(item,index){ %>
+              	    <li class="uk-float-left"></li>
+              	    <% }) %>
+              	  </ul>
+              	</div>
+			</div>
+			<div class="uk-clearfix trade-nav">
+				<div class="drop-down uk-float-left uk-width-1-3">
+					<% if(sign==1){ %>
+					<p class="nav-i uk-text-center"><a class="active" href="/cms/exhinvite/recent.html">Recent Activities<i class="uk-icon-angle-down"></i><span class="active-line"></span></a></p>
+					<ul class="drop-down-i j-recent">
+						<% cateNav.recent.forEach(function(item,index){ %>
+						<li>
+							<div class="uk-clearfix"><p class="uk-float-left uk-width-9-10"></p><a href="/cms/exhinvite/recent.html?industryId=<%= item.industryId %>"><%= item.industryNameEn %></a> <i class="uk-icon-angle-right uk-float-right uk-width-1-10 uk-text-right"></i></div>
+							<% if (item.cluster.length!=0) { %>
+							<ul class="drop-down-ii">
+								<% item.cluster.forEach(function(a,idx){ %>
+								<li><a href="/cms/exhinvite/recent.html?iwId=<%= a.iwId %>"><%= a.iwNameEn %></a></li>
+								<% }) %>
+							</ul>
+							<% } %>
+						</li>
+						<% }) %>
+					</ul>
+					<% }else { %>
+					<p class="nav-i uk-text-center"><a href="/cms/exhinvite/recent.html">Recent Activities<i class="uk-icon-angle-down"></i><span class="active-line"></span></a></p>
+					<% } %>
+				</div>
+				<div class="drop-down past uk-float-left uk-width-1-3">
+					<% if(sign==2){ %>
+					<p class="nav-i uk-text-center"><a class="active" href="/cms/exhinvite/past.html">Past Activities<i class="uk-icon-angle-down"></i><span class="active-line"></span></a></p>
+					<ul class="drop-down-i j-past">
+						<% cateNav.past.forEach(function(item,index){ %>
+						<li>
+							<div class="uk-clearfix"><p class="uk-float-left uk-width-9-10"></p><a href="/cms/exhinvite/past.html?industryId=<%= item.industryId %>"><%= item.industryNameEn %></a> <i class="uk-icon-angle-right uk-float-right uk-width-1-10 uk-text-right"></i></div>
+							<% if (item.cluster.length!=0) { %>
+							<ul class="drop-down-ii">
+								<% item.cluster.forEach(function(a,idx){ %>
+								<li><a href="/cms/exhinvite/past.html?iwId=<%= a.iwId %>"><%= a.iwNameEn %></a></li>
+								<% }) %>
+							</ul>
+							<% } %>
+						</li>
+						<% }) %>
+					</ul>
+					<% }else { %>
+					<p class="nav-i uk-text-center"><a href="/cms/exhinvite/past.html">Past Activities<i class="uk-icon-angle-down"></i><span class="active-line"></span></a></p>
+					<% } %>
+				</div>
+				<div class="uk-float-left uk-width-1-3 uk-text-center drop-down">
+					<% if(sign==0){ %>
+					<p class="nav-i uk-text-center pad-r-40"><a class="active" href="/cms/exhinvite/Advantages.html">Advantages<span class="active-line"></span></a></p>
+					<% }else { %>
+					<p class="nav-i uk-text-center pad-r-40"><a href="/cms/exhinvite/Advantages.html">Advantages<span class="active-line"></span></a></p>
+					<% } %>
+				</div>
+			</div>
+		</div>
+		<% if(!!sign) { %>
+		<div class="data-block">
+			<ul class="uk-container uk-container-center uk-clearfix j-data-block height">
+				<% base.forEach(function(item,index) { %>
+				<li class="data-item">
+					<p><a href="/activity/register.html?activityId=<%= item.id %>">
+						<% if (!!item.cmsImg || item.cmsImg.length!=0) { %>
+						<img src="<%- resize(item.cmsImg,386,154,3) %>">
+						<% }else{ %>
+						<img src="<%= assetsPath %>/global/images/exh_active/default_800_320.jpg">
+						<% } %>
+						</a>
+					</p>
+					<p><a href="/activity/register.html?activityId=<%= item.id %>" title="<%= item.name %>"><%= item.name %></a></p>
+					<p class="icon-date icon date">Date: <%= item.statrTime %> ~ <%= item.endTime %></p>
+					<p class="icon-map icon location" title="<%= item.address %>" title="<%= item.address %>">Venue: <%= item.address %></p>
+					<p class="icon-view uk-text-right"><span class="icon eye"></span><%= item.pageViews %></p>
+				</li>
+				<% }) %>
+			</ul>
+			<% if(base.length>9) { %>
+			<div class="uk-container uk-container-center uk-margin-top view-all">View all <i class="uk-icon-angle-down"></i></div>
+			<% } %>
+		</div>
+		<% } else if(!sign) { %>
+		<div class="bg-color-f2 advantages border-transparent">
+			<div class="uk-container uk-container-center">
+				<div class="advantages-top">
+					<h1 class="uk-text-center">Our Advantages</h1>
+					<p class="uk-margin-top">Invitees will be organized to inspect the industrial clusters and implement promotional activities.Since the 110th Canton Fair, we have inspected many industrial clusters and key local enterprises, such as Jun’An cowboy, Foshan ceramics, Guzhen lighting,and achieved great success.</p>
+				</div>
+				<ul class="uk-clearfix advantages-midl uk-text-center">
+					<li class="uk-float-left uk-width-1-4">
+						<p><img src="<%= assetsPath %>/global/images/exh_active/1.jpg"></p>
+						<strong>Free air ticket</strong>
+						<p>Air ticket from your country to Nanchang could be refunded</p>
+					</li>
+					<li class="uk-float-left uk-width-1-4">
+						<p><img src="<%= assetsPath %>/global/images/exh_active/2.jpg"></p>
+						<strong>Free food</strong>
+						<p>A variety of foods available: Chinese food, Vegetarian food, Muslim food, Non-alcoholic & Alcoholic drinks</p>
+					</li>
+					<li class="uk-float-left uk-width-1-4">
+						<p><img src="<%= assetsPath %>/global/images/exh_active/3.jpg"></p>
+						<strong>Free hotel</strong>
+						<p>Free hotel stays and food</p>
+					</li>
+					<li class="uk-float-left uk-width-1-4">
+						<p><img src="<%= assetsPath %>/global/images/exh_active/4.jpg"></p>
+						<strong>Sourcing assistant</strong>
+						<p> Personal sourcing assistant during this activity</p>
+					</li>
+				</ul>
+				<ul class="advantages-bot">
+					<li><img src="<%= assetsPath %>/global/images/exh_active/5.jpg"></li>
+					<li>
+						<p><img src="<%= assetsPath %>/global/images/exh_active/6.jpg"></p>
+						<p class="uk-margin-top">You may also scan this QR code<br/>to free download it</p>
+					</li>
+					<li>
+						<p><img src="<%= assetsPath %>/global/images/exh_active/7.png"></p>
+						<p class="uk-margin-top">Search "mr-world.com" on<br/>App Store or Google Play</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<% } %>
+	</div>
+		
+		
+	<% include ../components/footer-en.html %>
+    <% include ../block/js.html %>
+    <% include ../components/back-top.html %>
+    <script type="text/javascript">
+		require(["jquery","superslide"],function($,slide){
+			$(".view-all").bind("click",function(){
+				if ($(".j-data-block").hasClass('height')) {
+					$(".j-data-block").removeClass('height');
+					$(this).html("Less <i class='uk-icon-angle-up'></i>");
+				}else{
+					$(".j-data-block").addClass('height');
+					$(this).html("View all <i class='uk-icon-angle-down'></i>");
+				}
+				
+			});
+
+			$('.trade-rote').slide({
+					mainCell:'.bd ul',
+					titCell:'.hd ul li',
+					effect:'leftLoop',
+					autoPlay:true,
+					delayTime:500,
+					interTime:2500,
+				})
+
+			function setHeight() {
+				var recentHeight = $('.j-recent').height();
+				var pastHeight = $('.j-past').height();
+
+				(!!recentHeight)?$(".drop-down-ii").css('min-height', recentHeight):'';
+				(!!pastHeight)?$(".drop-down-ii").css('min-height', pastHeight):'';
+
+			}
+			setHeight()
+		})
+	</script>
+</body>
+</html>

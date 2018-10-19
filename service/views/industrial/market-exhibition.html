@@ -1,0 +1,413 @@
+<!--专业镇 内容页-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title><%= base.name %> - <%= config.title %></title>
+
+  <% include ./block/head.html %>
+
+<link href="<%= assetsPath %>/IndustrialCluster/css/home.css" rel="stylesheet" type="text/css">
+<link href="<%= assetsPath %>/IndustrialCluster/css/index.css" rel="stylesheet" type="text/css">
+<link href="<%= assetsPath %>/IndustrialCluster/css/p/home.css" rel="stylesheet" type="text/css">
+<link href="<%= assetsPath %>/IndustrialCluster/css/professionaltown.css" rel="stylesheet" type="text/css">
+<link href="<%= assetsPath %>/IndustrialCluster/css/p/brandType.css" rel="stylesheet" type="text/css">
+<link href="<%= assetsPath %>/IndustrialCluster/css/zhuanyezhen.css" rel="stylesheet" type="text/css">
+<link href="<%= assetsPath %>/IndustrialCluster/css/zzsc.css" rel="stylesheet" type="text/css">
+<link href="<%= assetsPath %>/Professionalmarket/css/exhibitionactivities.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<% include ./components/header.html %>
+<% include ./block/market-nav.html %>
+
+<div class="gm-container">
+  <!--导航-->
+  <div class="gm-area-a clearfix">
+      <div class="lemenu">
+        <% if (menus && menus.length) { %>
+        <% menus.forEach(function(menu, i){ %>
+          <div class="ti"><%= menu.name %></div>
+          <div class="ty">
+            <% if (menu.children && menu.children.length) {%>
+            <% menu.children.forEach(function(item) { %>
+            <a href="<%= item.link %>"><span><%= item.name %></span></a>
+            <% }) %>
+            <% } %>
+          </div>
+          <% if (i != (menus.length-1)) { %>
+          <div class="ln"></div>
+          <% } %>
+        <% }) %>
+        <% } %>
+      </div>
+      <div class="banner-nav">
+        <div class="ig">
+            <div class="bd">
+              <div class="tempWrap" style="overflow:hidden; position:relative; width:654px"><ul class="picList" style="width: 1962px; left: -1308px; position: relative; overflow: hidden; padding: 0px; margin: 0px;">
+                <li style="float: left; width: 654px;">
+                   <a href="javascript:;"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/e-a-b1.jpg"></a>
+                </li>
+                <li style="float: left; width: 654px;">
+                   <a href="javascript:;"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/e-a-b1.jpg"></a>
+                </li>
+                <li style="float: left; width: 654px;">
+                   <a href="javascript:;"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/e-a-b1.jpg"></a>
+                </li>
+              </ul></div>
+            </div>
+            <div class="hd">
+              <ul><li class="">1</li><li class="">2</li><li class="on">3</li></ul>
+            </div>
+        </div>
+        <div class="igri">
+          <div class="tp">
+            <div class="bi">撞色休闲旅行包</div>
+            <div class="sm">新品上市</div>
+          </div>
+          <div class="bt">
+            <a href="javascript:;" class="adbtn">
+              <div class="ig">
+                <img src="http://dev.gdp.com/static/Professionalmarket/images/1/e-a-bb2.jpg">
+              </div>
+              <div class="pr">
+                <div class="t">
+                    <span class="uni">￥</span> 96.00
+                </div>
+                <div class="ut">
+                    原价：￥199.00
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="super-purchasing-b">
+      <div class="ti"><span class="te">超级采购</span>
+        <div class="end-box" id="end-box-id">
+          <span class="on">距离结束时间</span>
+          <span class="day">31</span>
+          <span class="th">天</span>
+          <span class="hour">08</span><span class="sep">:</span><span class="mini">00</span><span class="sep">:</span><span class="sec">17</span>
+        </div>
+      </div>
+      <div class="lt">
+        <div class="awl"><a href="javascript:;" class="prev"><span class="ic"></span></a></div>
+        <div class="bd">
+          <div class="tempWrap" style="overflow:hidden; position:relative; width:1125px"><ul class="picList" style="width: 1575px; left: 0px; position: relative; overflow: hidden; padding: 0px; margin: 0px;">
+            <li style="float: left; width: 210px;">
+            <a href="javascript:;" class="pd">
+              <div class="ig">
+                <img src="http://dev.gdp.com/static/Professionalmarket/images/1/s-p-p1.jpg">
+              </div>
+              <div class="pr">
+                ￥ 135.00-180.00
+              </div>
+              <div class="na">
+                2016新款小清新立体蝴蝶结…
+              </div>
+              <div class="unpr">
+                原价: ￥158.00-238.00
+              </div>
+            </a>
+            </li>
+            <li style="float: left; width: 210px;">
+            <a href="javascript:;" class="pd">
+              <div class="ig">
+                <img src="http://dev.gdp.com/static/Professionalmarket/images/1/s-p-p2.jpg">
+              </div>
+              <div class="pr">
+                ￥ 239.00
+              </div>
+              <div class="na">
+                2016新款小清新立体蝴蝶结…
+              </div>
+              <div class="unpr">
+                原价: ￥158.00-238.00
+              </div>
+            </a>
+            </li>
+            <li style="float: left; width: 210px;">
+            <a href="javascript:;" class="pd">
+              <div class="ig">
+                <img src="http://dev.gdp.com/static/Professionalmarket/images/1/s-p-p3.jpg">
+              </div>
+              <div class="pr">
+                ￥ 119.00
+              </div>
+              <div class="na">
+                立体蝴蝶结宝石pu皮革珍珠...
+              </div>
+              <div class="unpr">
+                原价: ￥158.00-238.00
+              </div>
+            </a>
+            </li>
+            <li style="float: left; width: 210px;">
+            <a href="javascript:;" class="pd">
+              <div class="ig">
+                <img src="http://dev.gdp.com/static/Professionalmarket/images/1/s-p-p4.jpg">
+              </div>
+              <div class="pr">
+                ￥ 99.00
+              </div>
+              <div class="na">
+                立体蝴蝶结宝石pu皮革珍珠...
+              </div>
+              <div class="unpr">
+                原价: ￥158.00-238.00
+              </div>
+            </a>
+            </li>
+            <li style="float: left; width: 210px;">
+            <a href="javascript:;" class="pd">
+              <div class="ig">
+                <img src="http://dev.gdp.com/static/Professionalmarket/images/1/s-p-p5.jpg">
+              </div>
+              <div class="pr">
+                   ￥ 89.00-129.00
+              </div>
+              <div class="na">
+                手提包单肩斜挎包横款公文包…
+              </div>
+              <div class="unpr">
+                原价: ￥158.00-238.00
+              </div>
+            </a>
+            </li>
+            <li style="float: left; width: 210px;">
+            <a href="javascript:;" class="pd">
+              <div class="ig">
+                <img src="http://dev.gdp.com/static/Professionalmarket/images/1/s-p-p1.jpg">
+              </div>
+              <div class="pr">
+                ￥ 135.00-180.00
+              </div>
+              <div class="na">
+                2016新款小清新立体蝴蝶结…
+              </div>
+              <div class="unpr">
+                原价: ￥158.00-238.00
+              </div>
+            </a>
+            </li>
+            <li style="float: left; width: 210px;">
+            <a href="javascript:;" class="pd">
+              <div class="ig">
+                <img src="http://dev.gdp.com/static/Professionalmarket/images/1/s-p-p2.jpg">
+              </div>
+              <div class="pr">
+                ￥ 239.00
+              </div>
+              <div class="na">
+                2016新款小清新立体蝴蝶结…
+              </div>
+              <div class="unpr">
+                原价: ￥158.00-238.00
+              </div>
+            </a>
+            </li>
+          </ul></div>
+        </div>
+        <div class="awr"><a class="next" href="javascript:;"><span class="ic"></span></a></div>
+      </div>
+    </div>
+
+    <div class="hot-seller-b">
+      <div class="ti">
+        本周热销
+      </div>
+      <div class="lt">
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p1.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 299.00</div>
+            <div class="na"><a href="#">飞机轮PC拉杆箱6182 商务出差旅行箱男女休闲旅游登机箱20寸黑色</a></div>
+            <div class="cmna">广州爱华皮具有限公司</div>
+            <div class="pc">起批量 1 个 <a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p2.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 125.00</div>
+            <div class="na"><a href="#">铆钉双肩包女韩版帆布书包牛津布真皮休闲背包旅行包学院风潮 黑色</a></div>
+            <div class="cmna">广州市艾比利有限公司</div>
+            <div class="pc">起批量 10 个<a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p3.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 59.00-100.00</div>
+            <div class="na"><a href="#">春夏新款铆钉双肩包女韩版女包2016女士背包休闲包包时尚多功能单肩包学院风潮</a></div>
+            <div class="cmna">VQGT箱包皮具有限公司</div>
+            <div class="pc">起批量 100 个 <a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p4.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 235.00</div>
+            <div class="na"><a href="#">七公主背包双肩包女韩版休闲学院风书包2016新款时尚旅行包潮 米白背面黑</a></div>
+            <div class="cmna">奈乐仕箱包专营店</div>
+            <div class="pc">起批量 50 个<a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p5.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 35.99-38.50</div>
+            <div class="na"><a href="#">2016新款双肩包韩版休闲小包多功能单肩斜跨胸包时尚百搭女式背包欧美潮流女包春...</a></div>
+            <div class="cmna">广州市伯顿思皮具</div>
+            <div class="pc">起批量 100 个<a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p6.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 109.00</div>
+            <div class="na"><a href="#">新款韩版女士包包 背包双肩包女 休闲女包女式包学生书包 9913 浅蓝色</a></div>
+            <div class="cmna">广州兰博丹尼皮具</div>
+            <div class="pc">起批量 1 个 <a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p7.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 350.00</div>
+            <div class="na"><a href="#">花花公子男包商务 单肩包时尚横款大包 潮男皮包公文包手提包男士6501-4黑色蓝色</a></div>
+            <div class="cmna">恒博箱包专营店</div>
+            <div class="pc">起批量 1 个 <a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p8.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 119.00-195.00</div>
+            <div class="na"><a href="#">耐磨头层牛皮钱包3页13卡位加拉链零钱包活页多卡位短款钱包 黑色Q493123</a></div>
+            <div class="cmna">广州鸿盛亿皮具</div>
+            <div class="pc">起批量 10 个<a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p9.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 43.00</div>
+            <div class="na"><a href="#">女包2016春夏新款菱格链条女士单肩包韩版潮斜挎包休闲时尚小方包</a></div>
+            <div class="cmna">乐淘汇皮具</div>
+            <div class="pc">起批量 50 个 <a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+        <div class="uni">
+          <div class="ig"><div class="bx"><a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/o-s-p10.jpg"></a></div></div>
+          <div class="mdbg"></div>
+          <div class="mdif"><div class="fv"><a href="javascript:;" class="fva"><span class="icfv"></span>收藏</a></div><div class="bn"><a href="javascript:;" class="bna"><span class="icbn"></span>加入购物车</a></div></div>
+          <div class="pf">
+            <div class="pr">￥ 4756.00</div>
+            <div class="na"><a href="#">卢卡尼鳄鱼皮商务手提包带密码锁公文包真皮男士单肩包</a></div>
+            <div class="cmna">广州蒙度鰙皮具</div>
+            <div class="pc">起批量 1 个 <a href="javascript:;" class="ema"><span class="ic"></span></a></div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+    <div class="hot-store-b">
+      <div class="ti">热门商家</div>
+      <div class="lt">
+         <div class="u">
+          <div class="im">
+            <a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/SupplierP1.jpg"></a>
+          </div>
+          <div class="sl">
+            <div class="te"><a href="#"><span class="par">莎莎雅皮具</span><span class="par">Shasha Ya leather</span></a></div>
+          </div>
+        </div>
+        <div class="u">
+          <div class="im">
+            <a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/SupplierP2.jpg"></a>
+          </div>
+          <div class="sl">
+            <div class="te"><a href="#"><span class="par">艾米莉皮具</span><span class="par">Emily Leather</span></a></div>
+          </div>
+        </div>
+        <div class="u">
+          <div class="im">
+            <a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/SupplierP3.jpg"></a>
+          </div>
+          <div class="sl">
+            <div class="te"><a href="#"><span class="par">红鸟皮具</span><span class="par">Emily Leather</span></a></div>
+          </div>
+        </div>
+        <div class="u">
+          <div class="im">
+            <a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/SupplierP4.jpg"></a>
+          </div>
+          <div class="sl">
+            <div class="te"><a href="#"><span class="par">爱比特皮具</span><span class="par">Aibitepi Leather</span></a></div>
+          </div>
+        </div>
+        <div class="u">
+          <div class="im">
+            <a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/SupplierP5.jpg"></a>
+          </div>
+          <div class="sl">
+            <div class="te"><a href="#"><span class="par">艾米莉皮具</span><span class="par">Emily Leather</span></a></div>
+          </div>
+        </div>
+        <div class="u">
+          <div class="im">
+            <a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/SupplierP6.jpg"></a>
+          </div>
+          <div class="sl">
+            <div class="te"><a href="#"><span class="par">鸿盛亿皮具</span><span class="par">Hongsheng leather billion</span></a></div>
+          </div>
+        </div>
+        <div class="u">
+          <div class="im">
+            <a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/SupplierP7.jpg"></a>
+          </div>
+          <div class="sl">
+            <div class="te"><a href="#"><span class="par">爱马思特皮具</span><span class="par">Aimasite leather</span></a></div>
+          </div>
+        </div>
+        <div class="u">
+          <div class="im">
+            <a href="#"><img src="http://dev.gdp.com/static/Professionalmarket/images/1/SupplierP8.jpg"></a>
+          </div>
+          <div class="sl">
+            <div class="te"><a href="#"><span class="par">卡拉羊皮具</span><span class="par">Aimasite leather</span></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<% include ./components/footer.html %>
+
+</body>
+</html>

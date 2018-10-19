@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ./block/head.html %>
+	<link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/seller_download_app.css">
+</head>
+<body>
+	<% include ./components/header-two.html %>
+
+<div class="outer-wrapper">
+
+<div class="banner seller-banner">
+	<div class="inner">
+		<h1>商业人脉 全球贸易</h1>
+		<h2><span>230万</span>采购商 每年<span>5000亿</span>美金采购需求</h2>
+		<img src="<%= assetsPath %>/global/images/cms/download_app/help_center_qr_code.jpg" alt="" />
+		<p class="txt">扫描下载Mr-World APP</p>
+		<div class="who">
+			<p class="buyer"><a href="/cms/download-app.html">buyer</a></p>
+			<p class="seller"><a class="active" href="/cms/download-app-seller.html">卖家</a></p>
+			<div class="line"></div>
+		</div>
+	</div>
+</div>
+
+<div class="uk-container uk-container-center features">
+
+	<h3 class="features-title">App新特点</h3>
+	<div class="features-bg"></div>
+	<div class="features-banner">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="<%= assetsPath %>/global/images/cms/download_app/seller-phone1.png" alt="">
+					<span>交友国际采购商和供应商，打造买卖家朋友圈</span>
+				</div>
+				<div class="swiper-slide">
+					<img src="<%= assetsPath %>/global/images/cms/download_app/seller-phone2.png" alt="">
+					<span>实时翻译，同声传译打通语言障碍不用懂外语，照样卖全球！</span>
+				</div>
+				<div class="swiper-slide">
+					<img src="<%= assetsPath %>/global/images/cms/download_app/seller-phone3.png" alt="">
+					<span>万众创业，人脉越广，收益越大</span>
+				</div>
+			</div>
+			<div class="swiper-prev"><i class="uk-icon-chevron-left"></i></div>
+			<div class="swiper-next"><i class="uk-icon-chevron-right"></i></div>
+		</div>
+	</div>
+
+</div>
+
+<div class="info">
+	<div class="img_wrap"><img width="150" height="150" src="<%= assetsPath %>/global/images/cms/download_app/info-logo.png" alt="" /></div>
+	<p class="info_txt">Mr-world.com应用程序是全球贸易领先的批发移动市场。</p>
+	<p class="info_txt">从世界各地的供应商处购买产品，全部来自您的移动设备的便利。</p>
+	<ul class="detail uk-clearfix">
+		<li class="uk-float-left">
+			<img src="<%= assetsPath %>/global/images/cms/download_app/detail-bg1.png" alt="" />
+			<h6>商务配对</h6>
+			<p>为买家和供应商提供广泛的联系渠道，更快更高效。</p>
+		</li>
+		<li class="uk-float-left">
+			<img src="<%= assetsPath %>/global/images/cms/download_app/detail-bg2.png" alt="" />
+			<h6>国际支付宝</h6>
+			<p>确保买家和供应商的资金安全，使每一笔交易无风险。</p>
+		</li>
+		<li class="uk-float-left">
+			<img src="<%= assetsPath %>/global/images/cms/download_app/detail-bg3.png" alt="" />
+			<h6>检验服务</h6>
+			<p>督察将协助检查产品并提供检验报告。</p>
+		</li>
+	</ul>
+</div>
+
+</div> 
+
+	<% include ./components/footer-en.html %>
+	<% include ./block/js.html %>
+	<script type="text/javascript" src="<%= assetsPath %>/cms/js/seller_download_app.js"></script>
+
+</body>
+</html>

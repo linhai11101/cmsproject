@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ./../block/head.html %>
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/main.css">
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/town-activity.css">
+</head>
+
+<body>
+    <% include ../components/header-two.html %>
+        <% include ./../block/industrial-nav.html %>
+            <div class="uk-container uk-container-center uk-margin-top">
+                <% if (!banner1 || banner1.length==0) { %>
+                    <div class="top-screen uk-container uk-container-center uk-clearfix">
+                        <img src="<%= assetsPath %>/global/images/cms/coopration_banner.jpg">
+                    </div>                
+                <% }else { %>
+                <div class="top-screen uk-container uk-container-center uk-clearfix">
+                    <div class="rotate j-silde uk-float-left">
+                        <div class="picFocus">
+                            <div class="bd">
+                                <div class="tempWrap" style="overflow:hidden; position:relative; width:880px;">
+                                    <ul style="left: 0px; position: relative; overflow: hidden; padding: 0px; margin: 0px;">
+                                        <% banner1.forEach(function(item,i){ %>
+                                            <li class="uk-float-left" style="width: 880px;">
+                                                <a href="/<%= item.link %>"><img src="<%= resize(item.img,880,320,3) %>"></a>
+                                            </li>
+                                        <% }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="hd">
+                                <ul>
+                                    <% banner1.forEach(function(item,i){ %>
+                                        <li></li>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% if(banner2[0].img || banner3[0].img) { %>
+                        <div class="addIndustrial uk-float-right">
+                            <a href="/<%= banner2[0].link %>.html"><img src="<%= resize(banner2[0].img,300,150,3) %>"></a>
+                            <a href="/<%= banner3[0].link %>.html"><img src="<%= resize(banner3[0].img,300,150,3) %>"></a>
+                        </div>
+                    <% } %>
+                </div>
+                <% } %>
+                <div class="uk-container uk-container-center">
+                    <% if(!base[0].allNull) { %>
+                    <div class="uk-block-title"><span class="uk-clearfix"><span class="uk-line"></span><i class="uk-float-right"></i></span>
+                        <h3 class="uk-text-center">Recommendation Activities</h3><span class="uk-clearfix"><span class="uk-line"></span><i class="uk-float-left"></i></span>
+                    </div>
+                    <div class="brandsList">
+                        <div class="activity">
+                            <ul>
+                                <% base.forEach(function(item,i){ %>
+                                <li>
+                                        <a href="/industrial/<%= item.iwId %>/<%= item.activityActId %>/activity-detail.html">
+                                    <img src="<%= resize(item.image,283,180,3) %>">
+                                  </a>
+                                  <a href="/industrial/<%= item.iwId %>/<%= item.activityActId %>/activity-detail.html" title="<%= item.name %>">
+                                    <h4><%= item.name %></h4>
+                                  </a>
+                                  <p>
+                                    <%= item.statrTime.slice(0,10) %>~<%= item.endTime.slice(0,10) %>
+                                    <% if(item.activitiesStatus!=2){ %>
+                                      <span class="uk-float-right">
+                                        <i></i><%= item.minActivitiesNumber %>~<%= item.maxActivitiesNumber %>
+                                      </span>
+                                    <% } %>
+                                  </p>
+                                  <% if(item.activitiesStatus!=2){ %>
+                                    <p>Deadline:<%= item.deadlineTime %></p>
+                                  <% }else{ %>
+                                    <p class="pageView"><i class="uk-icon-eye"></i><span><%= item.pageViews %></span>
+                                  <% } %>
+                                </li>
+                              <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                    <% } %>
+                    <div class="uk-panel uk-margin-top" id="townActivity"  v-if='activityShow' v-cloak>
+                        <div class="uk-panel-title offline-activities">
+                            <i class="offline-icon"></i> Offline Activities
+                            <span @click="changStatus($event)" v-cloak>
+                          <a href="javascript:;" class="j-act-status active" data-state="4">All</a>
+                          <span class="border"></span>
+                            <a href="javascript:;" class="j-act-status" data-state="1">Signing Up</a>
+                            <span class="border"></span>
+                            <a href="javascript:;" class="j-act-status" data-state="3">Registration Closed</a>
+                            <span class="border"></span>
+                            <a href="javascript:;" class="j-act-status" data-state="0">Cancelled</a>
+                            <span class="border"></span>
+                            <a href="javascript:;" class="j-act-status" data-state="2">Finished</a>
+                            </span>
+                        </div>
+                       
+                        <div class="activity">
+                            <ul class="offline-first uk-container">
+                                <li v-for="item in townActivitys">
+                                    <a :href="'/industrial/'+ item.iwId + '/' + item.id +'/activity-detail.html'">
+                                        <img :src="'<%= imgHost %>' + item.image">
+                                    </a>
+                                    <a :href="'/industrial/'+ item.iwId +'/' + item.id +'/activity-detail.html'" :title="item.name">
+                                        <h4 v-text="item.name"></h4>
+                                    </a>
+                                    <p>
+                                        <span v-if="item.statrTime" v-text="item.statrTime.slice(0,10)"></span>~
+                                        <span v-if="item.endTime" v-text="item.endTime.slice(0,10)"></span>
+                                        <span class="uk-float-right" v-if="item.activitiesStatus!=2">
+                                            <i></i>{{item.minActivitiesNumber}}~{{item.maxActivitiesNumber}}
+                                        </span>
+                                    </p>
+                                    <p v-if="item.activitiesStatus!=2">Deadline:{{item.deadlineTime}}</p>
+                                    
+                                    <p v-if="item.activitiesStatus==0" v-text="'Cancelled'"></p>
+                                    <p v-if="item.activitiesStatus==1" v-text="'Remaining Places: '+(item.maxActivitiesNumber*1-item.activitiesNumber*1)"></p>
+                                    <p class="pageView" v-if="item.activitiesStatus==2"><i class="uk-icon-eye"></i><span v-text="item.pageViews"></span></p>
+                                    <p v-if="item.activitiesStatus==2">Finished</p>
+                                    <p v-if="item.activitiesStatus==3" v-text="'Number Of Participants: '+item.activitiesNumber"></p>
+                                </li>
+                            </ul>
+                        </div>
+                     <div class="activity uk-text-center h-320" v-if='townActivitys.length == 0'>No Activities</div>
+                    </div>
+                    
+                    <div class="pager uk-margin-top uk-text-right" id="pager"></div>
+                </div>
+            </div>
+            <% include ../components/footer-en.html %>
+                <% include ./../block/js.html %>
+                    <script>
+                    var iwId = <%- JSON.stringify(iwId) %>;
+                    var a = <%- JSON.stringify(base[0]) %>;
+                    var b = <%- JSON.stringify(base[0].allNull) %>;
+                    </script>
+                    <script src="<%= assetsPath %>/cms/js/industrial/town-activity.js"></script>
+</body>
+
+</html>

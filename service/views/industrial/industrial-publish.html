@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ./../block/head.html %>
+
+     <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/main.css">
+
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/town-publish.css">
+
+</head>
+
+<body>
+    <% include ../components/header-two.html %>
+        <% include ./../block/industrial-nav.html %>
+            <div class="uk-container uk-container-center" id="publish">
+                <div class="top uk-margin-top uk-clearfix">
+                    <div class="uk-float-left">
+
+                        <img src="<%- resize(base[0].searchImage, 280, 180, 3) %>" class="logo">
+                    </div>
+                    <div class="uk-float-right top-right uk-clearfix">
+                        <div class="uk-float-left uk-width-4-5">
+                            <h3 ><%= base[0].nameEn%></h3>
+                            <p class="first-line">
+                                <span class="local">
+                                    <%= base[0].cityName%>,<%= base[0].provinceName%>,<%= base[0].countryName%>
+                                </span>
+                                <% if(base[0].government) { %>
+                                    <span class="government" title="<%= base[0].government%>">
+                                        <%= base[0].government%>
+                                    </span>
+                                <% } %>   
+                            </p>
+                            <p class="main-product uk-h3">Main Product:<%= base[0].mainProduct%></p>
+                            <p class="join-time">Join time:<%= base[0].joinTime%></p>
+                        </div>
+                        <div class="uk-float-right uk-width-1-5">
+                            <div class="uk-text-right">
+                                <i class="uk-icon-small" :class="data.msg.collected?'uk-icon-heart main-color':'uk-icon-heart-o'" @click="collection" style="cursor:pointer;font-size:1.3rem"></i>
+                                  <span style="font-size:1.3rem"> Favorites</span>
+                            </div>
+                            <p class="first-line1 uk-text-right"><a href="/industrial/comment-list/<%= base[0].iwId%>.html">See all Feedbacks(<span v-text="total"></span>)</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <form class=" uk-form-horizontal uk-form " id="comment">
+                        <div class="uk-form-row">
+                            <label for="fullName" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Rating：</label>
+                            <div class="uk-form-controls star">
+                                <div class="rate-star" v-for='(val,index) in rate'>
+                                    <span v-text="val.value"></span>
+                                    <i class="uk-icon-small uk-icon-star " v-for='item in val.star' :class="item<=val.checked?'full-star':'null-star'" @click="grade(item,index)"></i>
+                                     <em class="error-explain " :class="'error-msg'+index">This must be evaluated</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-form-row">
+                            <label for="title" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Title：</label>
+                            <div class="uk-form-controls">
+                                <input type="text" class="uk-form-large uk-form-width-large title" name="title" placeholder="Please input your title" v-model="title">
+                            </div>
+                        </div>
+                        <div class="uk-form-row content">
+                            <label for="content" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Content：</label>
+                            <div class="uk-form-controls">
+                               <textarea id="content" @keyup="count" maxlength="1500" onchange="this.value=this.value.substring(0, 1500)" onkeydown="this.value=this.value.substring(0, 1500)" onkeyup="this.value=this.value.substring(0, 1500)" name="content"></textarea>
+                                
+                                <p class="upload-msg">(<span v-text="num"></span>/1500)</p>
+                            </div>
+                        </div>
+                        <div class="uk-form-row">
+                            <label for="content" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Image：</label>
+                            <div class="uk-form-controls">
+                                <p class="upload-msg">you can upload five pictures at most,jpg/jpeg/png,belong 5M</p>
+                                 <div class="img">
+                                <div class="imgList" v-for="(item,index) in imgList">
+                                    <img :src="imgResize(item.url,120,120,3)" alt="">
+                                   <a class='del-btn' href="javascript:;" @click="del(index)">X</a>
+                                </div>
+                                 
+                                    <a id="upload" href="javascript:;"></a>
+                                </div>
+                                 <input type="text" name="commentimg[]" v-model="imgList.join(',')">
+                            </div>
+                        </div>
+                        <div class="uk-form-row btn-panel">
+                            <label class="uk-form-label"></label>
+                            <div class="uk-form-controls">
+                                <button type="button" id="btn-submit" class="uk-button uk-button-large uk-button-primary" @click="comment"> Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <% include ./../components/footer-en.html %>
+                <% include ./../block/js.html %>
+            <script>
+                var iwId = <%= base[0].iwId%>;
+            </script>
+        <script src="<%= assetsPath %>/cms/js/industrial/town-publish.js"></script>
+</body>
+
+</html>

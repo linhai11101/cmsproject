@@ -1,0 +1,144 @@
+<!--专业镇 内容页-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title><%= base.name %> - <%= config.title %></title>
+
+  <% include ./block/head.html %>
+
+
+  <link href="<%= assetsPath %>/IndustrialCluster/css/home.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/index.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/p/home.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/professionaltown.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/p/brandType.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/zhuanyezhen2.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/zzsc.css" rel="stylesheet" type="text/css">
+  <link href="http://club.mr-world.com/skin/css/thickbox.css" rel="stylesheet" type="text/css">
+
+  <style>
+  .box{padding:15px;}
+  .box h2{font-size:18px;padding-bottom: 15px;}
+  .actImgList,.newsList{overflow: hidden;}
+  .actImgList li{float:left;margin-top: 15px;margin-right: 15px;width:280px;overflow: hidden;} 
+  .actImgList li:nth-child(4n){margin-right: 0}
+  .actImgList li .actName{display: block;text-align: center;font-size:12px;margin-top:15px;height: 20px;}
+  .actImgList li img{border:1px solid #eee;padding:1px;}
+  
+  .newsList {float: left;width: 49%;}
+  .newsList li{margin-top:10px;margin-right: 20px;line-height:30px;height: 30px;overflow: hidden;}
+  .newsPic .newsPic{margin-right: 10px;}
+  .newsPic img{border:1px solid #eee;padding:1px;margin-right:5px;}
+  .videoList{float: right;width: 49.5%;border-left:1px solid #ddd;}
+  .videoList li{float:left;width:48%;margin-top:10px;margin-right: 20px;overflow: hidden;}
+    .videoList li:nth-child(2n){margin-right: 0}
+  </style>
+
+</head>
+<body>
+
+<% include ./components/header.html %>
+<% include ./block/industrial-nav.html %>
+
+<div id="con">
+  <div class="actbanner">
+     
+      <% if (base.actBanner) {%>
+           <img src="http://img.mrworld.com/<%= base.actBanner %>" /> 
+        <% } %>
+
+
+  </div>
+
+  <div id="container">
+
+  <div class="box">
+   <h2>Successive activities</h2>
+      <ul class="actImgList">
+             
+              <% if (actList) { %>
+            <% actList.forEach(function(item,i) { %>
+            <% if (item.actType =="1"){ %>
+              <li>
+                <a href="<%= item.url %>" target="_blank"><img src="<%- resize(item.img, 280, 280, 2) %>" width="280" height="280" > </a>
+                <span class="actName"> <a href="<%= item.url %>"><%= item.name %></a></span>
+              </li>
+               <% }%>
+            <% }) %>
+          <% } %>
+
+      </ul>
+
+    </div>
+
+
+     <div class="box" style="border-top: 10px solid #f3f3f3">
+     <h2>Enterprise honor</h2>
+      <ul class="actImgList">
+             
+              <% if (actList) { %>
+            <% actList.forEach(function(item,i) { %>
+           <% if (item.actType =="2"){ %>
+              <li>
+                <a href="<%- resize(item.img, 800, 800, 2) %>" class="thickbox" target="_blank"><img src="<%- resize(item.img, 280, 280, 2) %>" width="280" height="280" > </a>
+                <span class="actName"> <a href="<%= item.url %>"><%= item.name %></a></span>
+              </li>
+               <% }%>
+            <% }) %>
+          <% } %>
+
+      </ul>
+
+    </div>
+
+
+
+      <div class="box" style="border-top: 10px solid #f3f3f3">
+       <h2>News Media</h2>
+      <ul class="newsList">
+             
+              <% if (news) { %>
+            <% news.forEach(function(item,i) { %>
+           <% if (item.newsType =="1"){ %>
+              <li>
+              <a href="<%= item.newsUrl %>" target="_blank" class="newsPic"><img src="<%- resize(item.img, 30, 30, 2) %>" width="30" height="30"> </a>
+                <span class="Name"><a href="<%= item.newsUrl %>" target="_blank"><%= item.name %></a></span>
+              </li>
+               <% }%>
+            <% }) %>
+          <% } %>
+
+      </ul>
+
+      <ul class="videoList">
+         
+
+          <% if (news) { %>
+            <% news.forEach(function(item,i) { %>
+           <% if (item.newsType =="2"){ %>
+              <li>
+              <iframe width="100%" height="300" src="<%= item.videoUrl %>" frameborder="0" allowfullscreen></iframe>
+                
+               
+              </li>
+              <% }%>
+            <% }) %>
+          <% } %>
+
+      </ul>
+
+    </div>
+
+
+  </div>
+
+ </div> 
+
+<% include ./components/footer.html %>
+
+
+<script src="http://club.mr-world.com/skin/js/thickbox-compressed.js" type="text/javascript" language="javascript"></script>
+
+</body>
+</html>

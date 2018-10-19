@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ./../block/head.html %>
+     <link href="<%= assetsPath %>/cms/css/industrial/main.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/market-apply.css">
+</head>
+
+<body>
+     <% include ../components/header-two.html %>
+    <% include ./../block/market-nav.html %>
+
+        <div class="uk-container uk-container-center" id="market-apply">
+            <div class="uk-top">
+                <p>Home > <%= base[0].townName%> >  <%= base[0].nameEn%> > <span>Apply For An Invitation</span></p>
+            </div>
+            <div class="middle">
+                <div class="active">
+                    <div class="circle"></div>
+                    <span class="circle-small">1</span>
+                </div><div>
+                    <div class="circle"></div>
+                    <span class="circle-small">2</span>
+                </div><div>
+                
+                    <div class="circle"></div>
+                    <span class="circle-small">3</span>
+                </div><div>
+               
+                    <div class="circle"></div>
+                    <span class="circle-small">4</span>
+                </div>
+            </div>
+            <div class="msg">
+                <ul class="uk-flex">
+                    <li class="uk-width-1-4">
+                        <h3 class="active">Apply For An Invitation</h3></li>
+                    <li class="uk-width-1-4">
+                        <h3>Customer service will contact you </h3></li>
+                    <li class="uk-width-1-4">
+                        <h3>Customer service will arrange you a trip</h3></li>
+                    <li class="uk-width-1-4">
+                        <h3>Arrive in time to begin the trip</h3></li>
+                </ul>
+            </div>
+            <div class="form-title">
+            <span>Material</span>
+
+            </div>
+            <form id="applyform" class=" uk-margin-large-top uk-form-horizontal uk-form ">
+                <div class="uk-form-row">
+                    <label for="fullName" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Full Name：</label>
+                    <div class="uk-form-controls">
+                        <input type="text" class="uk-form-large uk-form-width-large" id="name" name="fullName" placeholder="Please input your full name">
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label for="phoneNumber" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Phone Number：</label>
+                    <div class="uk-form-controls">
+                        <input type="text" class="uk-form-large uk-form-width-large" id="phone" name="phone" placeholder="Please input your phone number">
+                    </div>
+                </div>
+                   <div class="uk-form-row">
+                    <label for="number" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Number：</label>
+                    <div class="uk-form-controls">
+                        <input type="text" class="uk-form-large uk-form-width-large" id="number" name="number" placeholder="Please input the number of visitors">
+                    </div>
+                </div>
+                 <div class="uk-form-row">
+                    <label for="day" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Days：</label>
+                    <div class="uk-form-controls">
+                        <input type="text" class="uk-form-large uk-form-width-large" id="days" name="day" placeholder="Please input the number of days">
+                    </div>
+                </div>
+                   <div class="uk-form-row">
+                    <label for="arrival" class="uk-form-label uk-h4 uk-text-right"><em>*</em>Time To Arrival:</label>
+                    <div class="uk-form-controls">
+                  <input type="text" readonly="readonly" id="updateTimeStart" class="laydate-icon time-input" name="updateTimeStart"
+                  placeholder="Please enter the time of arrival" >
+                  <em class="error-explain" id="arrival-error">Please enter the time of arrival</em>
+                      
+                    </div>
+                </div>
+                 <div class="uk-form-row">
+                    <label  class="uk-form-label uk-h4 uk-text-right"><em>*</em>Description：</label>
+                    <div class="uk-form-controls">
+                      <textarea id="description" @keyup="count" maxlength="1500" onchange="this.value=this.value.substring(0, 1500)" onkeydown="this.value=this.value.substring(0, 1500)" onkeyup="this.value=this.value.substring(0, 1500)" name="description"></textarea>
+                    <p class="upload-msg">(<span v-text="num"></span>/1500)</p>
+                    </div>
+                </div>
+                <div class="uk-form-row btn-panel">
+                    <label class="uk-form-label"></label>
+                    <div class="uk-form-controls">
+                        <button type="button" id="btn-submit" class="uk-button uk-button-large uk-button-primary" @click="commit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <% include ./../components/footer-en.html %>
+        <% include ./../block/js.html %>
+        <script>
+         var iwId = <%- JSON.stringify(iwId) %>
+        </script>
+        <script src="<%= assetsPath %>/cms/js/industrial/market-apply.js"></script>
+</body>
+
+</html>

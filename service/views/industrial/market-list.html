@@ -1,0 +1,82 @@
+<!--Professional Market-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Professional Market - <%= config.title %></title>
+  <link rel="shortcut icon" href="<%= assetsPath %>/common/images/favicon.ico" type="image/x-icon">
+  <% include ./../block/head.html %>
+  <link href="<%= assetsPath %>/IndustrialCluster/css/home.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="<%= assetsPath %>/Professionalmarket/css/main2.css">
+</head>
+<body>
+
+<% include ./../components/header.html %>
+<% include ./../components/main-nav.html %>
+
+<div class="gm-banner">
+<% if(slides && slides.length) { %>
+<div class="main-slide" id="main-slide">
+
+  <div class="hd">
+	<ul>
+	  <% slides.forEach(function(item, i){ %>
+	  <% if (i > 2 ){ return }%>
+	  <li></li>
+	  <% }) %>
+	</ul>
+  </div>
+  <div class="bd">
+	<ul>
+	  <% slides.forEach(function(item, i){ %>
+	  <% if (i > 2 ){ return }%>
+	  <li>
+		<a href="<%= item.link %>" target="_blank">
+		  <img src="<%- resize(item.img, 'origin') %>">
+		</a>
+	  </li>
+	  <% }) %>
+	</ul>
+  </div>
+
+  <!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+  <a class="prev" href="javascript:void(0)"></a>
+  <a class="next" href="javascript:void(0)"></a>
+
+</div>
+<% } %>
+</div>
+
+<div class="container">
+  <% if (markets && markets.length) { %>
+  <% markets.forEach(function(market) { %>
+  <% if (market.items && market.items.length) { %>
+  <div class="gm-title">
+    <img src="<%- resize(market.img, 'origin') %>" alt="<%= market.name %>" width="1198" height="98"/>
+  </div>
+  <div class="row gm-conter">
+    <% market.items.forEach(function(item) { %>
+    <div class="col-md-3">
+      <a href="/market/<%= item._id %>.html" class="trumb-ac">
+        <img src="<%- resize(item.img, 264, 225) %>" width="264" height="225" />
+        <strong><%= item.name %></strong>
+        <p><%= item.title %></p>
+      </a>
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
+  <% }) %>
+  <% } %>
+</div>
+
+
+
+<% include ./../components/footer.html %>
+
+<script type="text/javascript" src="<%= assetsPath %>/Professionalmarket/market2.js"></script>
+</body>
+</html>
+

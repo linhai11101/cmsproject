@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>gm-fe</title>
+    <link rel="stylesheet" href="/cms/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/cms/lib/admin-lte/dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="/cms/lib/admin-lte/dist/css/skins/_all-skins.css">
+    <style>
+      .mb10{
+        margin-bottom: 10px;
+      }
+      html, body, .wrapper, .content-wrapper, .right-side{
+        height: 100%;
+      }
+      .content-wrapper{
+        overflow: auto;
+      }
+      .table-responsive{
+        overflow: visible !important;
+      }
+    </style>
+  </head>
+  <body class="skin-blue fixed">
+    <div id="app" class="wrapper">
+      <router-view></router-view>
+    </div>
+    <script>
+      var domain = '/cms/api';
+      var imgHost =  '<%= imgHost%>'
+      var domain_path = '<%= domainPath%>';
+      var domainCrm ='<%= domainCrm%>';
+    </script>
+    <script src="/cms/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/cms/dist/build.js"></script>
+  </body>
+</html>

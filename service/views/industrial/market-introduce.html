@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title> </title>
+
+  <% include ../block/head.html %>
+  <link href="<%= assetsPath %>/cms/css/industrial/main.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/cms/css/industrial/market-introduction.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+   <% include ../components/header-two.html %>
+<% include ../block/market-nav.html %>
+<div class="uk-container uk-container-center uk-margin-top uk-panel" id="market-introduce">
+   
+ <div class="uk-panel-body">
+      <div class="user-comment-info uk-clearfix">
+          <div class="uk-width-1-4 uk-float-left">
+              <img  src="<%- resize(base[0].searchImage,418,268,3) %>" alt=""  class="logo"> 
+          </div>
+          <div class="uk-width-3-4 uk-float-right">
+            <div class="show-title">
+              <div class="title uk-clearfix">
+                <div class="uk-h4 uk-text-bold uk-float-left">
+                  <span v-text="data.msg.nameEn" ></span>
+                </div>
+                <div class="icon-stat uk-float-right">
+                  <span class=" collection" @click="collection">
+                  <span :class="data.msg.collected?'uk-icon-heart main-color':'uk-icon-heart-o'"></span>
+                  <span>Favorites</span>
+                  </span>
+                </div>
+              </div>
+              
+              <div class="address uk-clearfix">
+                <div class="uk-float-left uk-width-2-5 local">
+                  <span v-text="data.msg.shortAddress"></span>
+                </div>
+                <div class="uk-float-left ellipsis government uk-width-3-5" v-if="data.msg.government">
+                  <span v-text="data.msg.government" :title="data.msg.government"></span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="main-pro-left">
+                <div class="uk-h4">
+                  <span v-text="'Main Products: '+data.msg.mainProduct"></span>
+                </div>
+                <div class="text-ellipsis-3">
+                  Join Time: <span class="joinTime" v-if="data.msg.joinTime" v-text="data.msg.joinTime.slice(0,10)"></span>
+                </div>
+              </div>
+            </div>
+            <div class="uk-margin-top contact-info">
+              <ul>
+              <li><span><i class="icon-phone"></i>Phone:</span><span v-text="data.msg.telephone"></span></li>
+                <li><span><i class="icon-postcode"></i>Postcode:</span><span v-text="data.msg.postCode"></span></li>
+                <li><span><i class="icon-address"></i>Address:</span><span v-text="data.msg.addressEn + data.msg.shortAddress"></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+ 
+        
+ </div>
+ <div class="uk-panel-body uk-margin-top">
+     <div class="certIntro uk-margin-top">
+      <h3>What is the introduction of industrial cluster certification? 
+      </h3>
+      <div><p>"Global Procurement Base" certification,developed and dominated by Mr-world.com for industrial clusters which have reached considerable capacity scale and quality standards in production, trade and other aspects,has been audited and commissioned by the  global authority of the certification body Switzerland SGS company and awarded an international certification authority."Global procurement base" certification content</p>
+       
+        <p>1. Product quality system: a comprehensive assessment of enterprise quality control  capabilities, research and development capabilities, cost management and after- sales service capabilities.</p>
+        <p>2. Enterprise comprehensive ability: including human resources, production capacity,export capacity, foreign trade capabilities, social responsibility.</p>
+        <p>3. Operational capacity: a comprehensive assessment of the actual operation of the enterprise indicators, such as the average delivery, product qualification rate, customer complaints rate, the proportion of big buyers and so on.</p>
+        <p>4. Qualification inspection: including: business license, tax registration certificate, the organization code inspection.</p>
+        <p>5. Certificate inspection: including product certification certificate inspection, system  certification inspection.</p>
+       
+        </div>
+
+    </div>
+    
+    <div class="uk-text-center"><img src="<%= assetsPath %>/global/images/industrial/gpb-img.png"/></div>
+
+    <div class="certRole uk-margin-large-top">
+       <h3>What is the role of promoting industry？  
+      </h3>
+      <div>
+        
+         <p>1.Shaping a international influential regional brand image of the industrial cluster, and build it as a global famous regional brand like “Switzerland Watches”, “French Perfume”, “French Wine”, “Milan Fashion”, enhancing industrial cluster brand influence and product added value.</p>
+         <p>2. Increasing quality and credit of industrial cluster via International authoritative organization, take it as credit endorsement of establish trustful relationship between the industrial clusters and global procurement resources, to win the trust of global buyers and achieve global marketing</p>
+         <p>3.Promote transformation and upgrading of the industry cluster , construct smart industry and promote the development of enterprises and products to high-end industry cluster</p>
+         <p>4.Build up the brands power in the industry cluster area, develop the global market , get more international orders, improve the international trading economy and local tax revenue, and push the labor employment.</p>
+       
+      </div>
+
+    </div>
+
+
+     <div class="certRole uk-margin-large-top">
+      <h3>Apply for SGS report
+      </h3>
+
+<div class="inner uk-clearfix">
+ <div class="certTarget">
+   <ul class="uk-float-left">
+   
+   <li>Supply Chain Capabilities</li>
+   <li>Quality Assurance Capacity</li>
+   <li>Foreign Trading Business</li>
+  
+   <li>Logistics Transportation</li>
+   <li>R & D Capability</li>
+   <li>Local Famous Enterprises</li>
+   <li>Competitive Industry Overview</li>
+     <li>Human Resource & Sustainable Development</li>
+      <li>Government Support and Long-term Planning & Development</li>
+   </ul>
+
+
+ </div>
+      <ul class="reportList uk-float-left">
+      <li v-for="(item,index) in data.msg.sgsDTOList" class="uk-float-left">
+          <img :src="imgResize(item.photo,215,300,3)">
+          <div class="reportName"><span v-text="item.name" class="uk-margin-right"></span><a :href="item.report" target="_blank" v-if="index==2">+view</a></div>
+          
+      </li>
+    </ul>
+  </div>
+    </div>
+    
+    <div class="uk-margin-top zyz-details" >
+      <p v-html="data.msg.detailsEn" class="detail"></p>
+    </div>
+    <div class="user-comment-pic j-slide">
+      <div class="bd">
+        <ul>
+          <li v-for="(item,index) in data.msg.propagandaPicture.split('|')">
+            <a href="javascript:;"><img  :src="imgResize(item,510,330,3)"></a>
+          </li>
+        </ul>
+      </div>
+      <a class="prev uk-button uk-button-primary" href="javascript:void(0);"></a>
+      <a class="next uk-button uk-button-primary" href="javascript:void(0);"></a>
+    </div>
+ </div>
+
+</div>
+
+<% include ../components/footer-en.html %>
+
+ <% include ./../block/js.html %>
+  <script>
+    var base =  <%- JSON.stringify(base) %>;
+    var iwId = <%= iwId %>;
+    var id = <%= iwId %>;       
+  </script>
+  <script src="<%= assetsPath %>/cms/js/industrial/market-introduce.js"></script>
+
+</body>
+</html>

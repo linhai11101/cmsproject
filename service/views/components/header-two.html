@@ -1,0 +1,151 @@
+<!-- header[[ -->
+<!-- 头部 [[-->
+
+<!--页面顶部导航链接 [[ -->
+
+<div class="top-nav" id="top-nav">
+  <div class="uk-container uk-container-center uk-padding-remove">
+    <!-- 欢迎 [[ -->
+    <div class="uk-float-left top-home">
+      <a href="/">Welcome to mr-world.com !</a>
+    </div>
+    <!-- 欢迎 ]] -->
+    <!-- 登入栏 [[ -->
+
+    <div class="uk-float-left top-login j-lgoin-jsonp">
+
+      <div class="j-login">
+       
+      </div>
+
+     
+      <!-- 登入栏 ]] --> </div>
+
+    <!-- 登入栏 ]] -->
+
+    <!-- 快捷菜单 [[ -->
+    <ul class="uk-float-right top-quick-menu">
+     <li class="j-app">
+        <div class="top-menu">
+          <a href="javascript:;" class="menu-hd">
+            APP Client  
+          </a>
+          <div class="select-con">
+            <img src="<%= assetsPath %>/global/images/erweima.jpg">
+            <p><span class="uk-display-block">Scan to download the app</span>
+             Easy procurement source</p>
+          </div>
+        </div>
+      </li>
+      <li class="top-separator"></li>
+      <li class="j-myshop-menu">
+        <div class="top-menu">
+                    
+            <a href='/user/buyer/login.html' class="j-myShop">My Mr-World <i class='uk-icon-angle-down'></i></a>
+             <div class="select-con j-myShop-con">
+             <a href="/bcenter/order/buyerList.html">Manage Order</a>
+             <a href="/bcenter/collect/product.html">My Favorites</a>
+             <a href="/bcenter/message/inboxView.html">Message Center</a>
+            </div>
+        
+         
+        </div>
+      </li>
+      
+      <li class="top-separator"></li>
+
+       <li>
+        <div class="top-menu j-serller">
+          <a href="http://club.mr-world.com" class="menu-hd" target="_blank">
+             Mr-World Club           
+          </a>
+         
+        </div>
+      </li>
+
+        <li class="top-separator"></li>
+
+        
+        <li>
+        <div class="top-menu j-serller">
+          <a href="http://cn.mr-world.com" class="menu-hd" target="_blank">
+             卖家首页           
+          </a>
+         
+        </div>
+      </li>
+
+    </ul>
+    <!-- 快捷菜单 ]] --> </div>
+</div>
+
+<!-- header [[ -->
+<header class="header header1200" id="header" >
+  <div class="uk-container uk-container-center uk-block">
+    <div class="header-tow logo">
+      <% if(!base || base.length==0) {%>
+        <% if(clusterType == 1) { %>
+          <a href="/industrial/<%= iwId %>/introduce.html"><img src="<%= assetsPath %>/global/images/logo.png" alt="" height="100"></a>
+        <% }else if(clusterType == 2) { %>
+          <a href="/market/<%= iwId %>/introduce.html"><img src="<%= assetsPath %>/global/images/logo.png" alt="" height="100"></a>
+        <% } %>
+      <% }else{ %>
+        <% if(clusterType == 1) { %>
+          <a href="/industrial/<%= iwId %>/introduce.html"><img src="<%- resize(base[0].logo, 226, 100, 3) %>"></a>
+        <% }else if(clusterType == 2) { %>
+          <a href="/market/<%= iwId %>/introduce.html"><img src="<%- resize(base[0].logo, 226, 100, 3) %>"></a>
+        <% }else if (clusterType == 3) { %>
+          <div class="trade-active uk-clearfix">
+            <a class="uk-float-left" href="/industrial.html"><img src="<%= assetsPath %>/global/images/logo.png" alt="" height="100"></a>
+            <p class="uk-float-left">Trade Activities</p>
+          </div>
+        <% }else { %>
+          <div class="trade-active uk-clearfix">
+            <a class="uk-float-left" href="/industrial.html"><img src="<%= assetsPath %>/global/images/logo.png" alt="" height="100"></a>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+
+  <div class="top-search uk-float-left">
+              <div class="menubtnbox uk-float-left" id="menubtnboxid" data-id="1">
+                    <a href="javascript:;" ><span id="search-value">Products</span> <span class="uk-icon-angle-down"></span></a>
+                    <ul class="uk-dropdown j-type-seach">
+                        <li data-id="1">Products</li>
+                        <li data-id="2">Suppliers</li>
+                    </ul>
+                </div>
+                <input type="text" placeholder="Enter a keyword to search terms" id="inputKeyword" name="inputKeyword" class="uk-float-left">
+                <input type="hidden" value="Suppliers">
+               
+                <button type="button" class="uk-button uk-button-large uk-button-primary uk-float-left" id="search-btn">
+                    <span class="uk-icon-search"></span>
+                    <% if (clusterType!=3) { %>
+                      Search
+                    <% }%>
+                </button>
+            </div>
+
+    <div class="postSourcRe uk-text-center uk-float-left" style="font-size:16px;">
+     
+        <span class="uk-icon-edit"></span>
+        <span> <a href="/bcenter/buyingLead/list.html" class="j-request">Buying Request</a></span>
+   
+    </div>
+
+    <div class="shopCar uk-text-center uk-float-right">
+      <p>
+         <a href="/cart.html" class="j-carturl">
+          <span class="uk-icon-shopping-cart"></span>
+          <span class="carNum">
+            <small class="shopCarNum">0</small>
+            <small>Cart</small>
+          </span>
+        </a>
+      </p>
+    </div>
+
+  </div>
+</header>
+
+

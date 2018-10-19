@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ./../block/head.html %>
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/main.css">
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/town-activity-detail.css">
+</head>
+
+<body id="activity-detail">
+    <% include ../components/header-two.html %>
+        <% include ./../block/market-nav.html %>
+            <div class="uk-container uk-container-center" id="activityDetail" v-cloak>
+                <div class="path">
+                    <!-- <p>Home > zhanjiang Aquotaic > <span>gujianjisjsns</span></p> -->
+                </div>
+                <div class="uk-panel zyz-info">
+                <img :src="imgResize(actDetailData.image,320,205,2)" width="320" height="205" alt="" class="logo">
+                <div class="uk-float-right">
+                  <h4 v-text="actDetailData.name"></h4>
+                  <p><i class="clock"></i>{{actDetailData.statrTime}} ~ {{actDetailData.endTime}}</p>
+                  <p><i class="address"></i>{{actDetailData.shortAddress}}</p>
+                  <p v-if="actDetailData.timeStatus!=2">
+                    <i class="user"></i>{{actDetailData.minActivitiesNumber}} ~ {{actDetailData.maxActivitiesNumber}}
+                  </p>
+                  <p v-if="actDetailData.timeStatus==2">
+                    <i class="user"></i>{{actDetailData.totalVisitNumber}}
+                  </p>
+                  <p v-if="actDetailData.timeStatus!=2">Deadline: {{actDetailData.deadlineTime}}</p>
+                  <p class="pageView" v-if="actDetailData.timeStatus==2"><i class="uk-icon-eye"></i><span v-text="actDetailData.pageViews"></span></p>
+                  <!-- <p v-if="actDetailData.timeStatus==2">Time: {{actDetailData.createdTime}}</p> -->
+  
+                  <p class="remian-place" v-if="actDetailData.timeStatus==0" v-text="'Cancelled'"></p>
+                  <p class="remian-place" v-if="actDetailData.timeStatus==1" v-text="'Remaining Places: '+( actDetailData.maxActivitiesNumber*1-actDetailData.number*1)"></p>
+                  <p class="remian-place" v-if="actDetailData.timeStatus==2" v-text="'Finished'"></p>
+                  <p class="remian-place" v-if="actDetailData.timeStatus==3" v-text="'Number Of Participants: '+actDetailData.number"></p>
+                  <!-- button -->
+                  <button class="uk-button-primary uk-button sign-up" @click="signUp" v-if='actDetailData.timeStatus==1&&actDetailData.applyStatus==0'>I  Want To Sign Up</button>
+                  <button class="uk-button-primary uk-button sign-up" @click="cancelSign(actDetailData.id)" v-if='  actDetailData.timeStatus==1&&actDetailData.applyStatus==1'>Cancel</button>
+                  <button class="uk-button-default uk-button sign-up" v-if='actDetailData.timeStatus==3||actDetailData.timeStatus==0'>Registration Closed</button>
+
+                  <dl class="uk-flex shareTo">
+                    <dt><i class="uk-icon-share-square-o"></i>Share</dt>
+                    <dd><a href="javascript:;" data-name="facebook" class="sns-share facebook" rel="nofollow"></a></dd>
+                    <dd><a href="javascript:;" data-name="twitter" class="sns-share twitter" rel="nofollow"></a></dd>
+                    <dd><a href="javascript:;" data-name="linkedin" class="sns-share linkedin" rel="nofollow"></a></dd>
+                    <dd><a href="javascript:;" data-name="linkep" class="sns-share linkep" rel="nofollow"></a></dd>
+                    <dd><a href="javascript:;" data-name="googleplus" class="sns-share googles" rel="nofollow"></a></dd>
+                  </dl>
+
+
+                  
+                </div>
+              </div>
+                <main>
+                    <div class="uk-float-left">
+                        <h4>Activity Details</h4>
+                        <p v-html="actDetailData.details"></p>
+                    </div>
+                    <div class="uk-float-right">
+                    <div class="picScroll-top" v-if="activitData.length!=0">
+                      <div class="hd" v-if="activitData.length>3">
+                        <a class="next uk-icon-angle-down"></a>
+                        <a class="prev uk-icon-angle-up"></a>
+                      </div>
+                      <div class="bd">
+                        <div class="tempWrap">
+                          <ul class="picList">
+                             <li v-for="(item,index) in activitData">
+                        <div class="pic">
+                          <a v-bind:href="item.link"  target="_blank" :title="item.name">
+                            <img :src="imgResize(item.image,252,194,3)">
+                          </a>
+                        </div>
+                        <div class="title">
+                          <a v-bind:href="item.link" target="_blank" v-text="item.name" :title="item.name"></a>
+                        </div>
+                      </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                     <div :class="activitData.length!=0?'uk-margin-top':''" >
+                        <div class="qr-code">
+                            <img src="<%= assetsPath %>/global/images/erweima.jpg">
+                            <p>Scan The QR Code</p>
+                            <p>Download Mr-world App</p>
+                            <p></p>
+                        </div>
+                        <div class="connect">
+                            <img src="<%= assetsPath %>/global/images/cms/contactImg_cms.png">
+                        </div>
+                    </div>
+                    </div>
+                </main>
+                <!-- dialog -->
+                <div id="actDialog" style="display: none;">
+                    <form id="actDialogForm" class="uk-form-horizontal">
+                        <div class="uk-form-row">
+                            <label class="uk-form-label" for="userName">Name:</label>
+                            <div class="uk-form-controls">
+                                <input type="text" name="userName" id="userName">
+                            </div>
+                        </div>
+                        <div class="uk-form-row">
+                            <label class="uk-form-label" for="userPhone">Phone:</label>
+                            <div class="uk-form-controls">
+                                <input type="text" name="userPhone" id="userPhone">
+                            </div>
+                        </div>
+                        <div class="uk-form-row">
+                            <label class="uk-form-label" for="userEmail">Email:</label>
+                            <div class="uk-form-controls">
+                                <input type="text" name="userEmail" id="userEmail">
+                            </div>
+                        </div>
+                        <div class="uk-form-row">
+                            <label class="uk-form-label" for="userNum">Number:</label>
+                            <div class="uk-form-controls">
+                                <input type="text" name="userNum" id="userNum">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <% include ./../components/footer-en.html %>
+                <% include ./../block/js.html %>
+                <% include ./../components/back-top.html %>
+            <script type="text/javascript">
+              var base = <%- JSON.stringify(base) %>;
+              var aact = <%- JSON.stringify(aact) %>;
+              var iwId = '<%= iwId %>';
+              var actId = '<%= activeId %>';
+            </script>
+            <script src="<%= assetsPath %>/cms/js/industrial/market-activity-detail.js"></script>
+</body>
+
+</html>

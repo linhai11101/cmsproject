@@ -1,0 +1,31 @@
+<!--专业镇 内容页-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title><%= base.name %> - <%= config.title %></title>
+
+  <% include ./block/head.html %>
+
+  <link href="<%= assetsPath %>/IndustrialCluster/css/home.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/index.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/p/home.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/professionaltown.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/p/brandType.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/zhuanyezhen.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/zzsc.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/exhibitiontradecenter.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<% include ./components/header.html %>
+<% include ./block/industrial-nav.html %>
+
+<div class="container clearfix">
+  <%- content %>
+</div>
+
+<% include ./components/footer.html %>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../block/head.html %>
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/fastship/fastship-index.css">
+</head>
+<body bgcolor="#f2f2f2">
+	<% include ../components/header-en.html %>
+	<div class="uk-container uk-container-center uk-margin-top">
+		<div class="uk-container uk-clearfix">
+			<div class="uk-float-left categories">
+				<ul class="uk-nav">
+				
+					<% stair.forEach(function(item,i){ %>
+						<li class="uk-parent">
+							<a href="<%= item.link %>">
+								<% if(item.img) { %>
+									<img src="<%- resize(item.img,23,23,3) %>">
+								<% } %>
+								<% if(!item.img) { %>
+									<img src="<%= assetsPath %>/global/images/default_2.png">
+								<% } %>
+								<span><%= item.name %></span>>
+							</a>
+							<ul>
+								<% if(  item.secArr.length != 0){ %>
+									<% item.secArr.forEach(function(itemi,i){ %>
+										<li>
+											<dl class="uk-float-left">
+												<dt><a href="<%= itemi.link %>"><%= itemi.name %></a></dt>
+												<% if(itemi.thrArr.length!=0){ %>
+													<% itemi.thrArr.forEach(function(itemii,i){ %>
+														<dd><a href="<%= itemii.link %>"><%= itemii.name %></a></dd>
+													<% }) %>
+												<% } %>
+											</dl>
+										</li>
+									<% }) %>
+								<% } %>
+							</ul>
+						</li>
+					<% }) %>
+				</ul>
+				<a href="javascript:;" style="display: none;">All categories >></a>
+			</div>
+			
+			<div class="uk-float-left bannerblock">
+
+			  <div id="slideBox" class="slideBox">
+                <div class="hd">
+                    <ul>
+						<% ads.forEach(function(item,i){ %>
+							<li href="javascript:;"></li>
+						<% }) %>
+                    </ul>
+                </div>
+                <div class="bd">
+             
+                    <div class="tempWrap">
+                       <ul>
+				           <% if(ads.length != 0){ %>
+							<% ads.forEach(function(item,i){ %>
+								<li class="uk-float-left">
+					               <a href="<%= item.link %>"><img src="<%- resize(item.img,890,300,3) %>"></a>
+				                </li>
+							<% }) %>
+						<% } %>
+					</ul>
+                    </div>
+                </div>
+            </div>
+
+                <div class="fsindexbanner">        
+				
+				<ul class="uk-flex">
+					<li>
+						<p><a href="javascript:;">Online Payment</a></p>
+						<p><a href="javascript:;">Select a product,fast online payment</a></p>
+					</li>
+					<li>
+						<p><a href="javascript:;">Escrow</a></p>
+						<p><a href="javascript:;">peyment give you guaranteed</a></p>
+					</li>
+					<li>
+						<p><a href="javascript:;">Fast shipment</a></p>
+						<p><a href="javascript:;">within 48 hours when you buyed</a></p>
+					</li>
+					<li>
+						<p><a href="javascript:;">Rapid arrival</a></p>
+						<p><a href="javascript:;">Air transport，products quickly to your hands</a></p>
+					</li>
+				</ul>
+			</div>
+			</div>
+			<div class="uk-float-left userinfo">
+				<dl>
+					<dt class="uk-flex">
+						<p><img src="<%= assetsPath %>/global/images/user-default.png" class="j-userimg"></p>
+						<div class="j-user-info"></div>
+					</dt>
+					<dd>
+						<a href="javascript:;" class="j-href">
+							<span>Wating for payment</span>
+							<span class="j-waitpay-num"></span>
+						</a>
+					</dd>
+					<dd>
+						<a href="javascript:;" class="j-href">
+							<span>Wating for shipping</span>
+							<span class="j-waitship-num"></span>
+						</a>
+					</dd>
+					<dd>
+						<a href="javascript:;" class="j-href">
+							<span>Wating for Receiving</span>
+							<span class="j-waitrece-num"></span>
+						</a>
+					</dd>
+					<dd>
+						<a href="javascript:;" class="j-href">
+							<span>My Favorites Products</span>
+							<span class="j-fav-num"></span>
+						</a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+
+		<div class="uk-container uk-container-center uk-margin-top indexchennal">
+			<div class="slide-box">
+				<div class="rotate j-silde">
+				  <% if(moduls.length > 4) {%>
+				  	<div class="hd">
+				  		<button class="prev uk-icon-angle-right"></button>
+				  		<button class="next uk-icon-angle-left"></button>
+				  	</div>
+				  <%} %>
+            	  <div class="bd">
+            	    <ul>
+            	      <% moduls.forEach(function(item,i){%>
+            	      	<li><a href="<%= item.link %>"><img src="<%- resize(item.img,358,215,3) %>"></a></li>
+					  <%}) %>
+            	    </ul>
+            	  </div>
+            	</div>
+
+			</div>
+		</div>
+		<ul class="fsfloors">
+			<% floor.forEach(function(item,i){ %>
+				<li>
+					<h3><span><%= item.name %></span><a href="<%= item.link %>">View more >></a></h3>
+					<dl class="uk-container uk-clearfix">
+						<dt class="uk-float-left">
+							<div>
+								<% if(item.cateArr.length != 0){ %>
+									<% item.cateArr.forEach(function(cate,i){ %>
+										<p>
+											<a href="<%= cate.link %>"><%= cate.name %></a>
+										</p>
+									<% }) %>
+								<% } %>
+							</div>
+							<img src="<%- resize(item.floorImg,360,394,3) %>">
+						</dt>
+						<% if(item.proArr.length != 0){ %>
+							<% item.proArr.forEach(function(pro,i){ %>
+								<dd class="uk-float-left">
+									<p>
+									<%  if(pro.sld) { %>
+									<a href="//<%=pro.sld %>.shop.<%= domain_url %><%=pro.link%>"><img src="<%- resize(pro.img,240,240,3) %>"></a>
+									 <% }else{ %>
+                                   <a href="<%= pro.link %>"><img src="<%- resize(pro.img,240,240,3) %>"></a>
+									  <% }%> 
+									</p>
+									<p>
+									<%  if(pro.sld) { %>
+										<a href="//<%=pro.sld %>.shop.<%= domain_url %><%=pro.link%>"><%= pro.name %></a>
+									 <% }else{ %>
+                                        <a href="<%= pro.link %>"><%= pro.name %></a>
+									  <% }%> 
+									</p>
+									<p>
+										<span>US $<%= pro.price %></span>
+									</p>
+									<p>
+										Retail price: <span>US $<%= pro.marketPrice %></span>
+									</p>
+								</dd>
+							<% }) %>
+						<% } %>
+					</dl>
+				</li>
+			<% }) %>
+		</ul>
+
+		<ul class="uk-clearfix explain">
+			<li class="uk-float-left">
+				<p></p>
+				<p>How to buy</p>
+				<p>The buying flow at here</p>
+				<p style="display: none;"><a href="javascript:;">learn more</a></p>
+			</li>
+			<li class="uk-float-left">
+				<p></p>
+				<p>Payment guarantee </p>
+				<p>Escrow make you mony safe</p>
+				<p style="display: none;"><a href="javascript:;">learn more</a></p>
+			</li>
+			<li class="uk-float-left">
+				<p></p>
+				<p>Help center</p>
+				<p>Please come in help center if you need help</p>
+				<p style="display: none;"><a href="javascript:;">learn more</a></p>
+			</li>
+		</ul>
+	</div>
+
+	<% include ../components/footer-en.html %>
+
+        <% include ../block/js.html %>
+        <% include ../components/back-top.html %>
+
+<script src="<%= assetsPath %>/cms/js/fastship/fastship-index.js"></script>
+	<script>
+		var logoText = '<%= logoText %>';
+		var stair = <%- JSON.stringify(stair) %>;
+		var moduls = <%- JSON.stringify(moduls) %>;
+		var floor = <%- JSON.stringify(floor) %>;
+	</script>
+
+</body>
+</html>

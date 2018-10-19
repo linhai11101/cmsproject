@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ./../block/head.html %>
+    <link href="<%= assetsPath %>/cms/css/industrial/main.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/market-comment-detail.css">
+</head>
+<body>
+     <% include ../components/header-two.html %>
+    <% include ../block/market-nav.html %>
+    <div class="uk-container uk-container-center uk-margin-top" id="marketComment">
+        <div class="user-comment-info uk-clearfix">
+          <div class="uk-width-1-4 uk-float-left">
+            <img  src="<%- resize(base[0].searchImage,280,180,3) %>" alt=""  class="logo"> 
+          </div>
+          <div class="uk-width-3-4 uk-float-right">
+            <div class="show-title">
+              <div class="title uk-flex">
+                <p class="uk-h4 uk-text-bold" v-text="base.nameEn">
+                </p>
+                <p class="fav"><i :class="collectionData.collected?'uk-icon-heart main-color':'uk-icon-heart-o'" @click="collection" style="cursor:pointer"></i>
+                  <span>Favorites</span>
+                </p>
+              </div>
+              <div class="address uk-flex">
+                <p class="local">
+                  <span v-cloak>{{base.cityName}},{{base.provinceName}},{{base.countryName}}</span>
+                </p>
+                <p v-clock v-if="base.government&&base.government.length!=0" class="government">
+                  <span v-text="base.government" :title="base.government"></span>
+                </p>
+              </div>
+            </div>
+            <div class="uk-flex">
+              <div class="main-pro-left">
+                <p class="uk-h4" class="main-product">Main Product: {{base.mainProduct}}</p>
+                <p class="text-ellipsis-3">
+                    Join Time:<span class="joinTime" v-text="base.joinTime.slice(0,10)"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="uk-flex">
+            <div class="comment-detail">
+                <ul class="total-comment uk-flex">
+                    <li class="uk-icon-star" v-for="a in 5"  :class="[Math.floor(totalScore)>=a?'hash-star':'',a-totalScore==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                </ul>
+                <ul class="comment-detail-list">
+                    <li class="uk-flex">
+                        <p>Price</p>
+                        <ul class="uk-flex">
+                            <li class="uk-icon-star" v-for="a in 5" :class="[Math.floor(priceScore)>=a?'hash-star':'',a-priceScore==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                        </ul>
+                    </li>
+                    <li class="uk-flex">
+                        <p>Quality</p>
+                        <ul class="uk-flex">
+                            <li class="uk-icon-star" v-for="a in 5" :class="[Math.floor(qualityScore)>=a?'hash-star':'',a-qualityScore==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                        </ul>
+                    </li>
+                    <li class="uk-flex">
+                        <p>Environment</p>
+                        <ul class="uk-flex">
+                            <li class="uk-icon-star" v-for="a in 5" :class="[Math.floor(environmentScore)>=a?'hash-star':'',a-environmentScore==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                        </ul>
+                    </li>
+                    <li class="uk-flex">
+                        <p>Service</p>
+                        <ul class="uk-flex">
+                            <li class="uk-icon-star" v-for="a in 5" :class="[Math.floor(serviceScore)>=a?'hash-star':'',a-serviceScore==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="feedback-more"><a href="/market/comment-list/<%= iwId %>.html">See all Feedbacks（<span class="foodback-num" v-text="commentNum"></span>）</a></p>
+                <a href='/market/comment/<%= iwId %>.html' type="button" class="uk-button uk-button-primary" >Share My Feedback</a>
+            </div>
+            <div class="user-comment">
+                <div class="uk-flex">
+                    <div class="user-portrait">
+                        <img :src="imgResize(commentDetail.photo,120,120,3)" v-clock v-if="commentDetail.photo&&commentDetail.photo.length!=0">
+                        <img src="<%= assetsPath %>/global/images/user-default_big.png" v-clock v-else>
+                        <p v-text="commentDetail.name?commentDetail.name:''"></p>
+                    </div>
+                    <div class="user-comment-detail">
+                        <h1 class="uk-h4 uk-text-bold" v-text="commentDetail.title"></h1>
+                        <div class="uk-flex">
+                            <ul class="uk-flex">
+                                <li class="uk-icon-star" v-for="a in 5"  :class="[Math.floor(commentDetail.synthesizeRating)>=a?'hash-star':'',a-commentDetail.synthesizeRating==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                            </ul>
+                            <div class="show-comment-detail">
+                                <a href="javscript:;"></a>
+                                <ul class="wrap-detail">
+                                    <li class="uk-flex">
+                                        <p>Price</p>
+                                        <ul class="uk-flex">
+                                            <li class="uk-icon-star" v-for="a in 5"  :class="[Math.floor(commentDetail.ratingPrice)>=a?'hash-star':'',a-commentDetail.ratingPrice==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                                        </ul>
+                                    </li>
+                                    <li class="uk-flex">
+                                        <p>Quality</p>
+                                        <ul class="uk-flex">
+                                            <li class="uk-icon-star" v-for="a in 5"  :class="[Math.floor(commentDetail.ratingQuality)>=a?'hash-star':'',a-commentDetail.ratingQuality==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                                        </ul>
+                                    </li>
+                                    <li class="uk-flex">
+                                        <p>Environment</p>
+                                        <ul class="uk-flex">
+                                            <li class="uk-icon-star" v-for="a in 5"  :class="[Math.floor(commentDetail.ratingEnvironment)>=a?'hash-star':'',a-commentDetail.ratingEnvironment==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                                        </ul>
+                                    </li>
+                                    <li class="uk-flex">
+                                        <p>Service</p>
+                                        <ul class="uk-flex">
+                                            <li class="uk-icon-star" v-for="a in 5"  :class="[Math.floor(commentDetail.ratingService)>=a?'hash-star':'',a-commentDetail.ratingService==0.5?'uk-icon-star-half-full hash-star':'']"></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p v-text="commentDetail.feedbackTime"></p>
+                        </div>
+                        <article v-text="commentDetail.content"></article>
+                        <div class="user-comment-pic j-slide" v-if="commentDetail.imgs">
+                            <div class="hd">
+                                <ul class="uk-flex">
+                                    <li v-for="n in commentDetail.imgs">
+                                        <img :src="'<%= imgHost %>' + n">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bd">
+                                <ul>
+                                    <li v-for="n in commentDetail.imgs">
+                                        <img :src="'<%= imgHost %>' + n">
+                                    </li>
+                                </ul>
+                            </div>
+                            <a class="prev uk-button uk-button-primary" href="javascript:void(0);"><</a>
+                            <a class="next uk-button uk-button-primary" href="javascript:void(0);">></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-comment">
+                    <h1><span>Comment</span></h1>
+                    <div class="uk-flex">
+                        <div class="min-user-portrait" v-if="!userData.isLogin">
+                            <img src="<%= assetsPath %>/global/images/user-default_big.png" v-clock>
+                        </div>
+                        <div class="min-user-portrait" v-if="userData.isLogin">
+                          <img :src="imgResize(userData.userPhoto,80,80,3)" v-clock v-if="userData.userPhoto&&userData.userPhoto.length!=0">
+                          <img src="<%= assetsPath %>/global/images/user-default_big.png" v-clock v-else>
+                          <p v-text="userData.userName" v-if="userData.userName" :title="userData.userName"></p>
+                          <p v-text="userData.email?userData.email:''" :title="userData.email" v-else></p>
+                        </div>
+                        <form class="uk-form" id="inputComment">
+                            <div class="uk-form-row">
+                                <textarea class="uk-text-left" required name="userComment" id="userComment" placeholder="Input your comment..." v-model="userComments.newComment"></textarea>
+                            </div>
+                            <div class="uk-form-row">
+                                <button type="button" class="uk-button uk-button-primary" @click="submitComment">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <ul class="user-comment-list">
+                    <li class="uk-flex" v-for="item in feedbackReplys">
+                        <div class="min-user-portrait">
+                            <img :src="imgResize(item.photo,80,80,3)" v-clock v-if="item.photo&&item.photo.length!=0">
+                            <img src="<%= assetsPath %>/global/images/user-default_big.png" v-clock v-else>
+                        </div>
+                        <div>
+                            <p>
+                                <span class="user-name" v-text="item.name" :title="item.name"></span><span v-text="item.feedbackTime"></span>
+                            </p>
+                            <article v-text="item.content"></article>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <% include ./../components/footer-en.html %>
+        <% include ./../block/js.html %>
+          <script>
+            var detailId = <%= detailId %>;
+            var iwId = <%= iwId %>;
+            var base = <%- JSON.stringify(base[0]) %>;
+        </script>
+        <script src="<%= assetsPath %>/cms/js/industrial/market-comment-detail.js"></script>
+      
+</body>
+</html>

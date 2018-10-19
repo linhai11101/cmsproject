@@ -1,0 +1,69 @@
+<!--专业镇 内容页-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title><%= base.name %> - <%= config.title %> -<%= news.name %> </title>
+
+  <% include ./block/head.html %>
+
+
+  <link href="<%= assetsPath %>/IndustrialCluster/css/home.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/index.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/p/home.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/professionaltown.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/p/brandType.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/zhuanyezhen2.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/zzsc.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/news.css" rel="stylesheet" type="text/css">
+  <style>
+  .box{padding:20px 15px;}
+  .box h2{font-size:18px;padding-bottom: 15px;}
+  .title h2, .title p{text-align:center;}
+  .title p{height: 50px;background: #fafafa;padding:10px;border: 1px solid #eee;}
+  .newsDetails {line-height: 22px;}
+
+  </style>
+
+</head>
+<body>
+
+<% include ./components/header.html %>
+<% include ./block/industrial-nav.html %>
+
+<div id="con">
+  <div class="actbanner">
+     
+    <% if (base.actBanner) {%>
+           <img src="http://img.mrworld.com/<%= base.actBanner %>" /> 
+        <% } %>
+
+
+  </div>
+
+  <div id="container">
+
+
+
+      <div class="box">
+      <div class="title">
+       <h2><%= news.name %></h2>
+       <p> <%= news.summary %></p>
+     </div>
+      
+      <div class="newsDetails mt20">
+      <%= news.content %>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+ </div> 
+
+<% include ./components/footer.html %>
+
+</body>
+</html>

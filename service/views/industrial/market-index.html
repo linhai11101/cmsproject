@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>
+        <%= base.nameEn %> -<%= config.title %>
+    </title>
+    <% include ../block/head.html %>
+    <link href="<%= assetsPath %>/cms/css/industrial/main.css" rel="stylesheet" type="text/css">
+    <link href="<%= assetsPath %>/cms/css/industrial/market-index.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<% include ../components/header-two.html %>
+<% include ../block/market-nav.html %>
+<div class="uk-container uk-container-center uk-margin-top">
+    <div class="uk-container uk-container-center">
+        <div class="top-screen uk-container uk-container-center uk-clearfix">
+            <%if(banner&&banner.length){%>
+            <div class="rotate j-silde uk-float-left">
+                <div class="bd">
+                    <ul>
+                        <% banner.forEach(function(single){ %>
+                        <li><a href="<%= single.link %>"><img src="<%- resize(single.img, 1200, 320, 3) %>"></a></li>
+                        <% }) %>
+                    </ul>
+                </div>
+                <div class="hd">
+                    <ul class="uk-flex round">
+                        <% banner.forEach(function(item, i){ %>
+                        <li></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+            <% } %>
+          
+        </div>
+        <div class="uk-container uk-container-center">
+            <%if(recommends&&recommends.length){%>
+            <div class="uk-block-title"><span class="uk-clearfix"><span class="uk-line"></span><i
+                    class="uk-float-right"></i></span>
+                <h3 class="uk-text-center">Recommendations</h3><span class="uk-clearfix"><span class="uk-line"></span><i
+                        class="uk-float-left"></i></span>
+            </div>
+            <div class="recomProd uk-clearfix">
+                <div class=" uk-clearfix l-info recommend">
+
+                    <% recommends.forEach(function(single,index){ %>
+                    <span class="uk-float-left l-banner recommend-shop<%= index+1 %>" id="recommend-shop<%= index+1 %>">
+           <a href="/shop/<%= single.shopId%>.html"><img src="<%- resize(single.img ,260,420, 3) %>"></a>
+         </span>
+                    <% }) %>
+                    <% } %>
+                    <%if(recommendProduct&&recommendProduct.length){%>
+                    <% recommendProduct.forEach(function(single, index){ %>
+                    <ul class="uk-float-right uk-clearfix recommend-product<%= index+1 %>"
+                        id="recommend-product<%= index+1 %>">
+                        <% single.products.forEach(function(item, i) { i%>
+                        <li>
+                            <a href="/product/<%=item.productId%>.html"><img
+                                    src="<%- resize(item.img ,180,160, 3) %>"></a>
+                            <a href="/product/<%=item.productId%>.html"><span class="prodName"><%= item.name %></span></a>
+                            <span class="price">US $<%= item.marketPrice %></span>
+                        </li>
+                        <% }) %>
+                    </ul>
+                    <% }) %>
+                </div>
+            </div>
+            <% } %>
+            <div class="uk-panel uk-margin-top">
+                <% if( hotProduct[0].products.length!=0) {%>
+                <div class="hotProd uk-float-left">
+                    <div class="uk-panel-title">Hot Products<span><a
+                            href="/market/<%= iwId %>/0/products.html">More>></a></span>
+                    </div>
+                    <div class="uk-panel-body">
+                        <% hotProduct.forEach(function(single, index){ %>
+                        <div class="item">
+                            <div class="cominfo">
+                                <% if(single.logo){%>
+                                <span><img src="<%- resize(single.logo, 65, 65, 3) %>"></span>
+                                <%}else{%>
+                                <span><img src="<%= assetsPath %>/global/images/company_default.png"></span>
+                                <%}%>
+                                <a href="/shop/<%= single.shopId %>.html" class="shop">
+                                    <span class="comName"><%= single.shop %></span>
+                                </a>
+                            </div>
+                            <ul class="uk-flex">
+                                <% single.products.forEach(function(item, i) {%>
+                                <li>
+                                    <a href="/product/<%=item.productId%>.html"><img
+                                            src="<%- resize(item.img, 160, 160, 3) %>"></a>
+                                    <a href="/product/<%=item.productId%>.html"><span
+                                            class="prodName"><%= item.name%></span></a>
+                                    <% if(item.marketPrice != '0.00') {%>
+                                    <span class="price">US $<%= item.marketPrice%></span>
+                                    <%}%>
+                                    <% if(item.marketPrice == '0.00') {%>
+                                    <span class="price"></span>
+                                    <%}%>
+                                    <span class="marketprice">US $<%= item.marketPrice%></span>
+                                </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+                <% } %>
+                <%if(bestProduct[0].products.length!=0){%>
+                <div class="bestProd uk-float-right">
+                    <div class="uk-panel-title">High-quality Supplier<span><a href="/market/<%= iwId %>/100/products.html">More>></a></span>
+                    </div>
+                    <div class="uk-panel-body">
+                        <% bestProduct.forEach(function(single, index){%>
+                        <div class="item">
+                            <ul class="uk-flex">
+                                <% single.products.forEach(function(item, i) {%>
+                                <li>
+                                    <a href="/product/<%=item.productId%>.html">
+                                        <img src="<%- resize(item.img, 120, 120, 3) %>">
+                                    </a>
+                                </li>
+                                <% }) %>
+                            </ul>
+                            <a href="/shop/<%= single.shopId %>.html" class="hot-shop"><span><%= single.shop %></span></a>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+            <% if(indexActive&&indexActive.length==1){%>
+            <div class="uk-panel uk-margin-top">
+                <div class="uk-panel-title">Activities<span><a href="/market/<%= iwId %>/activity.html">More>></a></div>
+                <div class="uk-panel-body">
+                    <% indexActive.forEach(function(item, index){ %>
+                    <% if ( index ==0 ) { %>
+                    <div class=" uk-float-left one-active"><a
+                            href="/market/activity-detail/<%= iwId %>/<%= item.id%>.html"><img
+                            src="<%- resize(item.img, 1160, 240, 3) %>"></a></div>
+                    <% } %>
+                    <% }) %>
+                </div>
+            </div>
+            <% } %>
+            <% if(indexActive&&indexActive.length==2){%>
+            <div class="uk-panel uk-margin-top">
+                <div class="uk-panel-title">Activities<span><a href="/market/<%= iwId %>/activity.html">More>></a></div>
+                <div class="uk-panel-body">
+                    <% indexActive.forEach(function(item, index){ %>
+                    <div class="uk-float-right actList two-active">
+                        <ul>
+                            <li class="index-active<%=index%>">
+                                <span class="l-img"><a href="/market/activity-detail/<%= iwId %>/<%= item.id%>.html"><img
+                                        src="<%- resize(item.img, 160, 100, 3) %>"></a></span>
+                                <span class="r-content ">
+           <a href="/market/activity-detail/<%= iwId %>/<%= item.id%>.html"><h4><%= item.name%></h4></a>
+           <div class="info">
+            <% if(item.status != 2){%>
+            <span><span>Deadine:</span><%= item.deadlineTime%></span>
+            <%}%>
+            <% if(item.status == 2){%>
+            <span class="page-view"><i class="uk-icon-eye"></i><%= item.pageViews%></span>
+            <%}%>
+            <% if(item.status == 0){%>
+            <span class="remainimg">Cancelled</span>
+            <%}%>
+            <% if(item.status == 1){%>
+            <span class="remainimg">Remaining Places:<%= item.maxActivitiesNumber*1 - item.activitiesNumber*1 %></span>
+            <%}%>
+            <% if(item.status == 2){%>
+            <span class="remainimg">Finished</span>
+            <%}%>
+            <% if(item.status == 3){%>
+            <span class="remainimg">Number Of Participants:<%= item.activitiesNumber%></span>
+            <%}%>
+
+          </div>
+          <a href="/market/activity-detail/<%= iwId %>/<%= item.id%>.html"><p class="detail"><%= item.details%></p></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+            <% } %>
+            <% if(indexActive&&indexActive.length>=3){%>
+            <div class="uk-panel uk-margin-top">
+                <div class="uk-panel-title">Activities<span><a href="/market/<%= iwId %>/activity.html">More>></a></div>
+                <div class="uk-panel-body">
+                    <% indexActive.forEach(function(item, index){ %>
+                    <% if ( index ==0 ) { %>
+                    <div class="industrial-adv uk-float-left"><a
+                            href="/market/activity-detail/<%= iwId %>/<%= item.id%>.html"><img
+                            src="<%- resize(item.img, 498, 240, 3) %>"></a></div>
+                    <% } %>
+                    <div class="uk-float-right actList">
+                        <ul>
+                            <% if ( index !=0 ) { %>
+                            <li class="index-active<%=index%>">
+                                <span class="l-img"><a href="/market/activity-detail/<%= iwId %>/<%= item.id%>.html"><img
+                                        src="<%- resize(item.img, 160, 100, 3) %>"></a></span>
+                                <span class="r-content">
+           <a href="/market/activity-detail/<%= iwId %>/<%= item.id%>.html"><h4><%= item.name%></h4></a>
+           <div class="info">
+            <% if(item.status != 2){%>
+            <span><span>Deadine:</span><%= item.deadlineTime%></span>
+            <% }else if(item.status == 2) { %>
+            <span class="page-view"><i class="uk-icon-eye"></i><%= item.pageViews%></span>
+            <% } %>
+            <% if(item.status == 2) { %>
+            <span class="remainimg">Finished</span>
+            <% }else if(item.status == 0) { %>
+            <span class="remainimg">Cancelled</span>
+            <% }else if(item.status == 1) { %>
+            <span class="remainimg">Remaining Places:<%= item.maxActivitiesNumber*1 - item.activitiesNumber*1 %></span>
+            <% }else if(item.status == 3) { %>
+            <span class="remainimg">Number Of Participants:<%= item.activitiesNumber%></span>
+            <% } %>
+          </div>
+          <a href="/market/activity-detail/<%= iwId %>/<%= item.id%>.html"><p class="detail"><%= item.details%></p></a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+            <% } %>
+            <!-- 反馈 -->
+            <% if(feedback&&feedback.length){ %>
+            <div class="uk-panel uk-margin-top feedbacks">
+                <div class="uk-panel-title town-fb">
+                    Feedbacks
+                    <span><a href="/market/comment-list/<%= iwId %>.html">More>></a></span>
+                </div>
+                <div class="uk-panel-body uk-clearfix">
+                    <% feedback.forEach(function(item, index){ %>
+                    <div id="<%= item.id %>" class="j-comment item uk-width-1-2 uk-clearfix uk-float-left">
+                        <input type="hidden" value="<%= item.id %>">
+                        <div class="uk-clearfix">
+                            <% if(item.photo||item.photo.length!=0){ %>
+                            <a href="/market/comment-detail/<%= iwId %>/<%= item.id%>.html">
+                                <img src="<%- resize(item.photo,60,60,2) %>">
+                            </a>
+                            <% }else{ %>
+                            <a href="/market/comment-detail/<%= iwId %>/<%= item.id%>.html">
+                                <img src="<%= assetsPath %>/global/images/user-default.png">
+                            </a>
+                            <% } %>
+                            <div class="r-content">
+                                <div class="fbk-title">
+                                    <span class="name"> <a href="/market/comment-detail/<%= iwId %>/<%= item.id%>.html"
+                                                           class="name"><%= item.title %></a></span>
+                                    <span class="star uk-float-right">
+              <% for(var i = 1;i <= 5;i++) {%>
+              <% if(item.sumScore>=i) { %>
+              <i class="uk-icon-star"></i>
+              <% }else if(i-item.sumScore*1 > 0 && i-item.sumScore*1 < 1) { %>
+              <i class="uk-icon-star-half-o"></i>
+              <% }else { %>
+              <i class="uk-icon-star-o"></i>
+              <% } %>
+              <% } %>
+            </span>
+                                </div>
+                                <div class="date">
+                                    <span class="uk-float-left"><%- item.name %></span>
+                                    <span class="uk-float-right"><%- item.createdTime.slice(0,10) %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="marketContent">
+                            <a href="/market/comment-detail/<%= iwId %>/<%= item.id%>.html"><%- item.content %></a>
+                        </p>
+                        <p class="comment">
+                            <i class="uk-icon-commenting-o"></i>
+                            <% if(item.feedbackNumber == 0){%>
+                            <a href="/market/comment-detail/<%= iwId %>/<%= item.id%>.html">Replies(<span>0</span>)</a>
+                            <%}%>
+                            <% if(item.feedbackNumber !=0 ){%>
+                            <a href="/market/comment-detail/<%= iwId %>/<%= item.id%>.html">Replies(<span><%- item.feedbackNumber %></span>)</a>
+                            <%}%>
+                        </p>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+            <% } %>
+            <div class="uk-panel uk-margin-top zyzblock uk-container uk-container-center" id="zyzblock">
+                <div class="uk-panel-body">
+                    <img src="<%- resize(base[0].searchImage, 280, 180, 3) %>" class="uk-float-left">
+                    <div class="r-content">
+                        <div class="zyz-title">
+                            <h3><%= base[0].nameEn %></h3>
+                            <span class="fav"><i :class="data.msg.collected?'uk-icon-heart main-color':'uk-icon-heart-o'"
+                                                 @click="collection"></i><span>Favorites</span></span>
+                        </div>
+                        <div class="info">
+                            <span class="uk-float-left local">
+                                <%= base[0].cityName %>,<%= base[0].provinceName %>,<%= base[0].countryName %>
+                            </span>
+                            <% if (base[0].government) { %>
+                              <span class="uk-float-left government" title="<%= base[0].government %>"><%= base[0].government %></span>
+                            <% } %>
+                        </div>
+                        <div class="text">Main products: <%= base[0].mainProduct %></div>
+                        <p><a href="/market/<%= iwId%>/introduce.html"><%= base[0].iwDetail %></a></p>
+                        <div class="btn-box"><a href="/market/<%= iwId%>/apply.html" class="uk-button uk-button-primary">I
+                            Want To Visit</a><a href="/market/comment/<%= iwId%>.html" class="uk-button uk-button-primary">Share
+                            My FeedBack</a></div>
+                        <div class="more"><a href="/market/<%= iwId%>/introduce.html">more>></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%if(category&&category.length){%>
+    <div class="float-block">
+        <ul>
+            <li><a href="/market/<%= iwId%>/0/products.html">All Category</a></li>
+            <% category.forEach(function(single){ %>
+            <li><a href="/market/<%= iwId%>/<%= single.id%>/products.html"><%= single.name %></a></li>
+            <% }) %>
+            <li><a href="#" id="top">Top</a></li>
+        </ul>
+    </div>
+    <% } %>
+</div>
+<% include ../components/footer-en.html %>
+<% include ./../block/js.html %>
+<script>
+    var id = <%= iwId %>;
+    var iwId = <%= iwId %>;
+    var indexActive = <%-JSON.stringify(indexActive) %> || [];
+    var recommendProduct = <%-JSON.stringify(recommendProduct) %>;
+    var hotProduct = <%-JSON.stringify(hotProduct) %>;
+</script>
+<script src="<%= assetsPath %>/cms/js/industrial/market-index.js"></script>
+</body>
+
+</html>

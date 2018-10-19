@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+      <% include ./block/head.html %>
+        <link rel="stylesheet" type="text/css" href="<%= assetsPath %>/cms/css/industrial/industrial.css">
+        
+    </head>
+    <body bgcolor="#eff2f6" id="industrialCates">
+        <% include ./components/header-en.html %>
+        <!--主要内容-->
+        <div class="top-screen">
+            <div class="rotate j-silde">
+              <div class="bd">
+                <ul>
+                 <% silde.forEach(function(item,i) { %>
+                    <li><a href="<%= item.link %>" target="_blank"><img src="<%- resize(item.img,1920,380,3) %>"></a></li>
+                  <% }) %>
+                </ul>
+              </div>
+              <div class="hd">
+                <ul class="uk-clearfix">
+                <% silde.forEach(function(item,i) { %>
+                  <li class="uk-float-left"></li>
+                <% }) %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <div class="uk-container uk-container-center" id="industrialIndexCates" v-cloak>
+          <div class="cate-gories uk-container uk-container-center uk-margin-top">
+            <h3 class="uk-h3 uk-text-center uk-text-bold">Industrial Cluster Categories</h3>
+            <ul class="cate-gories-list uk-container uk-container-center uk-clearfix">
+             
+            <% cate.forEach(function(item,i) { %>
+              <% if(i == 0) { %>
+                <li class="uk-float-left j-cate cate-active" v-on:click="changeIndustrialCate($event,<%= item.id %>)" data-cateid="<%= item.id %>" title="<%= item.nameEn %>">
+                  <a href="javascript:;" >
+                    <div>
+                      <p class="uk-text-bold">
+                       <%= item.nameEn %>
+                      </p>
+                      <p><img src="<%= imgHost + item.iconImg %>"></p>
+                    </div>
+                  </a>
+                </li>
+              <% }else { %>
+                <li class="uk-float-left j-cate" v-on:click="changeIndustrialCate($event,<%= item.id %>)" title="<%= item.nameEn %>">
+                  <a href="javascript:;" >
+                    <div>
+                      <p class="uk-text-bold">
+                       <%= item.nameEn %>
+                      </p>
+                      <p><img src="<%= imgHost + item.iconImg %>"></p>
+                    </div>
+                  </a>
+                </li>
+              <% } %>
+             <% }) %>
+            </ul>
+          </div>
+
+          <div class="loaction-wrap uk-container uk-container-center">
+            <div class="uk-clearfix uk-text-center addr">
+              <p class="uk-text-left uk-float-left addr-describe">
+               <span>Location:</span>
+              </p>
+              <div class="location-border location-padding uk-float-left" @click="showProvinces=!showProvinces">
+                <span v-text="province.enName"></span>
+                <span class="uk-icon-angle-down"></span>
+                <ul id="provinces">
+                  <li v-text="'All'" @click="chooseProvince('All','All')" v-show="showProvinces"></li>
+                  <li v-text="item.enName" v-for="(item,index) in prosvinces" @click="chooseProvince(item,index)" v-show="showProvinces"></li>
+                </ul>
+              </div>
+              <p class="uk-icon-angle-right uk-float-left"></p>
+              <div class="location-border location-padding uk-float-left"  @click="showCitys=!showCitys">
+                <span v-text="city.enName"></span>
+                <span class="uk-icon-angle-down"></span>
+                <ul id="citys">
+                  <li v-text="'All'"  @click="chooseCity('All','All')" v-show="showCitys"></li>
+                  <li v-text="item.enName" v-for="(item,index) in citys"  @click="chooseCity(item,index)" v-show="showCitys"></li>
+                </ul>
+              </div>
+              <form class="uk-float-left uk-form uk-form-stacked select-type">
+                <div class="uk-form-controls uk-form-controls-text">
+                  <p class="uk-form-controls-condensed">
+                    <span>Type:</span>
+                    <input type="radio" name="cluster" id="allType" value="" v-model="clusterType">
+                    <label for="allType">All</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="cluster" id="IDSTC" value="1" v-model="clusterType"> 
+                    <label for="IDSTC">Industrial Cluster</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="cluster" id="WH" value="2" v-model="clusterType"> 
+                    <label for="WH">Wholesale Market</label>
+                  </p>
+                </div>
+              </form>
+
+            </div>
+
+            
+            <ul class="loaction-wrap-list uk-container">
+            <!-- vue -->
+              <li class="uk-container" v-for="(item,idx) in industrials">
+                <div class="industrial-list-show uk-clearfix">
+                  <div class="uk-float-left search-img">
+                    <a :href="item.clusterType==1?'/industrial/'+item.iwId + '.html':'/market/'+item.iwId+'/index.html'" target="_blank"><img :src="imgResize(item.searchImage,420,268,3)"></a>
+                  </div>
+                  <div class="uk-width-3-4 uk-float-left">
+                    <div class="show-title">
+                      <div class="title">
+                        <p class="uk-h4 uk-text-bold">
+                          <a  :href="item.clusterType==1?'/industrial/'+item.iwId + '.html':'/market/'+item.iwId+'/index.html'" v-text="item.nameEn" target="_blank"></a>
+                          <span class="sgs" title="sgs" v-if="item.sgsHas"></span>
+                          <!--<span class="ipr" title="ipr"></span>-->
+                        </p>
+                      </div>
+                      <div class="address">
+                        <p class="local">
+                          <span v-text="item.cityName + ',' + item.provinceName + ',' + item.countryName"></span>
+                        </p>
+                        <p v-if="item.government" class="government">
+                          <span v-text="item.government" :title="item.government"></span>
+                        </p>
+                        <p class="main-pro">
+                         <span v-text="'Main products: ' + item.mainProduct" :title="'Main products: ' + item.mainProduct"></span>
+                        </p>
+                      </div>
+                      <div class="main-pro-left">
+                        <p class="text-ellipsis-3">
+                          <a :href="item.clusterType==1?'/industrial/'+item.iwId + '.html':'/market/'+item.iwId+'/index.html'" v-text="item.iwDetail" :title="item.iwDetail" target="_blank"></a>
+                        </p>
+                      </div>
+                      <div class="related-cluster"  v-if="item.wcenterNumber>0">
+                        <a :href="item.clusterType==1?'/industrial/'+item.iwId + '.html':'/market/'+item.iwId+'/index.html'" target="_blank">
+                          There are {{item.wcenterNumber}} related <span v-text="item.clusterType==1?'wholesale market':'industrial cluster'"></span>>>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="uk-float-right industrial-list-right">
+                    <ul class="uk-clearfix activities">
+                      <li v-for="(a,i) in item.act" v-if="i<2" class="uk-float-left">
+                        <a :href="item.clusterType==1?'/industrial/'+item.iwId+'/'+a.id+'/activity-detail.html':'/market/activity-detail/'+item.iwId+'/'+a.id + '.html'" target="_blank"><img :src="imgResize(a.img,200,130,3)"></a>
+                        <p><a :href="item.clusterType==1?'/industrial/'+item.iwId+'/'+a.id+'/activity-detail.html':'/market/activity-detail/'+item.iwId+'/'+a.id + '.html'" v-text="a.name" :title="a.name" target="_blank"></a></p>
+                      </li>
+                    </ul>
+                    <a :href="item.clusterType==1?'/industrial/' + item.iwId + '/activity.html':'/market/' + item.iwId + '/activity.html'" v-if="item.act.length>2">
+                      There are {{item.act.length}} activities is ongoing>>
+                    </a>
+                    <ul class="uk-clearfix odopt">
+                      <li class="uk-width-1-3 uk-float-left">
+                        <a :href="item.clusterType==1?'/industrial/' + item.iwId + '/0/products.html?type=Suppliers':'/market/' + item.iwId + '/0/products.html?type=Suppliers'" target="_blank">Suppliers(<span v-text="item.suppliersNumber" class="main-color"></span>)</a>
+                      </li>
+                      <li class="uk-width-1-3 uk-float-left">
+                        <a :href="item.clusterType==1?'/industrial/' + item.iwId + '/0/products.html?type=Products':'/market/' + item.iwId + '/0/products.html?type=Products'" target="_blank">Products(<span v-text="item.productNumber" class="main-color"></span>)</a>
+                      </li>
+                      <li class="uk-width-1-3 uk-float-left" :class="item.isCollect?'collected':''" @click="collect(item)">
+                        Favorites
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+        <% include ./components/footer-en.html %>
+
+          <% include ./block/js.html %>
+          <% include ./components/back-top.html %>
+
+          <script>
+            var silde = <%- JSON.stringify(silde) %>;
+            var provinceId="0";
+            var districtId ="";
+            var cityId="";
+            var logotext = 'Industrial Cluster';
+
+          </script>
+          <script src="<%= assetsPath %>/cms/js/industrial/industrial.js"></script>
+
+    </body>
+</html>
+            

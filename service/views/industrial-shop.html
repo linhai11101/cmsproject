@@ -1,0 +1,431 @@
+<!--专业镇 内容页-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title><%= base.name %> - <%= config.title %></title>
+
+  <% include ./block/head.html %>
+
+
+  <link href="<%= assetsPath %>/IndustrialCluster/css/home.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/index.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/p/home.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/professionaltown.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/p/brandType.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/zhuanyezhen.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/zzsc.css" rel="stylesheet" type="text/css">
+  <link href="<%= assetsPath %>/IndustrialCluster/css/onlineshop.css" rel="stylesheet" type="text/css">
+
+  <style>
+  @charset "utf-8";
+.pagination a {
+    text-decoration: none;
+  border: 1px solid #ededed;
+  color: #999;
+}
+
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 0.3em 0.8em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    background: #fff;
+}
+
+.pagination .current {
+    background: #f58220;
+    color: #fff;
+    padding: 0.2em 0.8em;
+  border: 1px solid #f58220;
+}
+
+.pagination .current.prev, .pagination .current.next{
+  color:#999;
+  border-color:#ededed;
+  background:#fff;
+}
+
+</style>
+
+</head>
+<body>
+
+<% include ./components/header.html %>
+<% include ./block/industrial-nav.html %>
+
+<div class="online-shop-searh-option">
+
+  <div class="search-query">
+
+    <ul>
+      <li class="query-price">
+         <div class="s-price" style="width: 22%; outline: rgb(223, 223, 223) solid 0px; background: none;float:left;">
+           <span class="te">Price：</span>
+           <input type="text" class="minPrice" placeholder="" value=""> <span class="ln">-</span>
+           <input type="text" class="maxPrice" placeholder="" value="">
+           <a class="s-price-go fr mr10">GO</a>
+         </div>
+         <div class="s-minorder ml5" style="width: 30%; outline: rgb(223, 223, 223) solid 0px; background: none;float:left;">
+          <span class="te">Min Order：</span><input type="text" class="minOrder" value="">
+          <span class="tex">Unit(s)</span>
+           <a class="s-minorder-go fr mr10">GO</a>
+         </div>
+      </li>
+      <li class="query-type">
+        <span class="tit">Supplier Type：</span>
+        <label>
+          <input type="checkbox" class="member free-Member" value="3"><span class="mem1"> </span><span class="te"> Prime Member</span>
+        </label>
+        <label>
+          <input type="checkbox" class="member vip-Member" value="0"><span class="mem2"> </span><span class="te"> Experience Member </span>
+        </label>
+        <label>
+          <input type="checkbox" class="member gold-Member" value="1"><span class="mem3"> </span><span class="te">Vip Member</span>
+        </label>
+        <label>
+          <input type="checkbox" class="member verified-Member" value="2"><span class="mem4"> </span><span class="te"> Gold Member</span>
+        </label>
+
+      </li>
+      <li class="purc-type">
+        <span class="tit">Purchase Type：</span>
+
+         <label>
+          <input type="radio" name="proType" class="s-all" value="0"><span class="te"> All </span>
+        </label>
+
+        <label>
+          <input type="radio" name="proType" class="s-product" value="1"><span class="te"> Wholesale </span>
+        </label>
+        <label>
+          <input type="radio" name="proType" class="s-sample" value="2"><span class="te"> Sample </span>
+        </label>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="container">
+<div class="shop-list j-porList">
+
+
+  </div>
+
+   <div id="Pagination" class="pagination" style="float: right;"><!-- 这里显示分页 --></div>
+
+  </div>
+
+<!-- <div class="list-page">
+
+</div> -->
+
+
+<% include ./components/footer.html %>
+
+<script src="http://club.mr-world.com/templets/default/img/jquery.pages.js"></script>
+
+
+<script>
+  $(function(){
+
+      var regPrice = /^\d{0,9}(\.\d{1,2})?$/;
+      var regCode = /^[0-9]+$/i;
+
+      var data = "";
+
+
+      var minPrice = '';
+      var maxPrice = '';
+      var minOrder = '';
+      var vip = [];
+      var productType = '';
+
+      var params = {page: null,total: null,pageSize: 20}
+      var initPages = true;
+
+      renderClue();
+
+    function renderClue(index) {
+       var index = index || 0;
+        params.page = index + 1;
+      $.ajax({
+
+      url: 'http://www.mr-world.com/productSearch/searchResult.cf?townId='+<%= base.id%>,//+<%= base.id%>,
+      data: params,
+     // async:false,
+      success: function(res) {
+        if (0 == res.code) {
+          params.total = res.pagination.total;
+
+ if(  res.data.result.itemList){
+         var  itemList= res.data.result.itemList;
+
+        for(var i=0;i<=itemList.length;i++){
+ if(  itemList[i] != undefined){
+       var index =  itemList[i].productImg.lastIndexOf(".");
+            ext  =  itemList[i].productImg.substring(index);
+            img =  itemList[i].productImg.substring(0,index)+"_223x221_2"+ext ;
+           itemList[i].productImg = img;
+        }
+}
+ }
+
+         var data = {
+            list: res.data.result.itemList
+          }
+          var html = template('productList', data);
+          $('.j-porList').html(html);
+
+           if (initPages) {
+            initPagination();
+            initPages = false;
+          }
+
+
+        }
+      }
+    })
+  }
+
+      $(".member").each(function(){
+        _this = $(this);
+        _this.click(function(event) {
+          /* Act on the event */
+        if($(this).prop("checked")){
+        vip.push($(this).val())
+
+        }else{
+        vip.splice($.inArray($(this).val(),vip),1);
+
+        }
+
+      params.vip=vip.join();
+      console.log(params.vip)
+      getSearch();
+
+        });
+
+      });
+
+     $(".s-product").click(function(){
+      if($(".s-product").prop("checked")){
+        params.productType=1;
+      }else{
+        params.productType=0
+      }
+
+      getSearch();
+
+    });
+
+       $(".s-sample").click(function(){
+      if($(".s-sample").prop("checked")){
+        params.productType=2;
+      }else{
+        params.productType=0
+      }
+      getSearch();
+    });
+
+       $(".s-all").click(function(){
+      if($(".s-all").prop("checked")){
+        params.productType="";
+      }else{
+        params.productType="";
+      }
+      getSearch();
+    });
+
+
+
+    //价格
+
+
+        $(".s-price-go").click(function(){
+          var minP = $(".minPrice").val();
+          var maxP = $(".maxPrice").val();
+           var index = index || 0;
+           params.page = index + 1;
+
+          if(minP != null && minP != '' && !regPrice.test(minP)){
+            alert("请输入正确的价格.");
+            return false;
+          }
+          if(maxP != null && maxP != '' && !regPrice.test(maxP)){
+            alert("请输入正确的价格.");
+            return false;
+          }
+          minPrice=minP;
+          maxPrice=maxP;
+          params.minPrice=minPrice;
+          params.maxPrice=maxPrice;
+         $.ajax({
+           url: 'http://www.mr-world.com/productSearch/searchResult.cf?townId='+<%= base.id%>,
+           type: 'POST',
+           dataType: 'json',
+           data: params,
+         })
+         .done(function(data) {
+           if (0 == data.code) {
+          params.total = data.pagination.total;
+
+
+         var data = {
+            list: data.data.result.itemList
+          }
+          var html = template('productList', data);
+          $('.j-porList').html(html);
+            initPagination();
+        }
+         })
+         .fail(function() {
+           console.log("error");
+         });
+
+
+
+        });
+
+    //最小订单数
+
+
+     $(".s-minorder-go").click(function(){
+
+          var mO = $(".minOrder").val()
+          if(mO == null || mO== ""){
+            alert("请输入最小订购量");
+            $(".minOrder").focus();
+            return false;
+          }
+          if(!regCode.test(mO)){
+            alert("请输入整数");
+            $(".minOrder").focus();
+            return false;
+          }
+          minOrder=mO;
+           params.minOrder=minOrder;
+         $.ajax({
+           url: 'http://www.mr-world.com/productSearch/searchResult.cf?townId='+<%= base.id%>,
+           type: 'POST',
+           dataType: 'json',
+           data: params,
+         })
+         .done(function(data) {
+           if (0 == data.code) {
+          params.total = data.pagination.total;
+
+
+         var data = {
+            list: data.data.result.itemList
+          }
+          var html = template('productList', data);
+          $('.j-porList').html(html);
+            initPagination();
+        }
+         })
+         .fail(function() {
+           console.log("error");
+         });
+
+
+        });
+
+
+       $('.j-search-shop').click(function(event) {
+        keyword = $('.ky').val();
+        var data = getSearch( minPrice, maxPrice, minOrder, productType, keyword);
+        window.location.href= data;
+      });
+
+
+
+
+    function getSearch( ){
+       $.ajax({
+           url: 'http://www.mr-world.com/productSearch/searchResult.cf?townId='+<%= base.id%>,
+           type: 'POST',
+           dataType: 'json',
+           data: params,
+         })
+         .done(function(data) {
+           if (0 == data.code) {
+          params.total = data.pagination.total;
+
+
+         var data = {
+            list: data.data.result.itemList
+          }
+          var html = template('productList', data);
+          $('.j-porList').html(html);
+            initPagination();
+        }
+         })
+         .fail(function() {
+           console.log("error");
+         });
+
+
+
+    }
+
+
+
+  function initPagination() {
+    var num_entries = params.total;
+
+    // 创建分页
+    $("#Pagination").pagination(num_entries, {
+      num_edge_entries: 1, //边缘页数
+      num_display_entries: 4, //主体页数
+      callback: renderClue,
+      items_per_page: params.pageSize, //每页显示1项
+      prev_text: "Prev",
+      next_text: "Next"
+    });
+}
+
+
+ function locationHref(){
+
+          var url="${path}${searchUrl}.html";
+
+          return url;
+        }
+
+
+
+ });
+</script>
+
+<script type="text/html" id="productList">
+  {{each list as item}}
+
+   <div class="uni">
+       <div class="ig"><div class="bx"><a href="/productDetail/detail/{{ item.productId}}.cf"><img src="{{ item.productImg}}"  class="lazy"></a></div></div>
+       <div class="pf">
+          <div class="pr">
+{{if item.price == 0 && item.minPrice ==0 && item.maxPrice==0}}
+ No quotation
+{{else if item.minPrice !=0 && item.maxPrice!=0 && item.price==0}}
+minPrice：${{ item.minPrice }}   maxPrice：${{ item.maxPrice}}
+{{else}}
+
+${{ item.price}}
+{{/if}}
+</div>
+      <div class="na"><a href="/productDetail/detail/{{ item.productId}}.cf">{{ item.productName }}</a></div>
+      <div class="cmna">{{ item.companyEnName}}</div>
+      <div class="pc">{{ item.minOrder }} {{ item.orderUnit }}  </div>
+    </div>
+  </div>
+ {{/each}}
+
+
+
+</script>
+
+
+</body>
+</html>

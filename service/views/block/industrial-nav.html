@@ -1,0 +1,26 @@
+<nav class="uk-navbar">
+	
+	  <ul class="uk-container uk-container-center uk-clearfix">
+	   <!-- <li class="uk-text-left"><span class="uk-icon-list-ul"></span>All Categories</li> -->
+		<li class="uk-float-left">
+			<a href="/industrial/<%= iwId %>.html"<% if ( '/industrial/' + iwId == path) {%>class="active"<% } %>>Home</a>
+		</li>
+		<li class="uk-float-left">
+			<a href="/industrial/<%= iwId %>/0/products.html"<% if (/products/.test(path)) {%> class="active" <% } %>>Products</a>
+		</li>
+		<li class="uk-float-left">
+			<a href="/industrial/<%= iwId %>/activity.html"<% if (/activity/.test(path)) {%> class="active" <% } %>>Activities</a>
+		</li>
+		<li class="uk-float-left">
+			<a href="/industrial/<%= iwId %>/introduce.html"<% if (/introduce/.test(path)) {%> class="active" <% } %>>Industry introduction</a>
+		</li>
+		<% if (base.cmsLink && base.cmsName) { %>
+    	  <li class="uk-float-left">
+    	    <a href="<%= base.cmsLink %>"><%= base.cmsName %></a>
+    	  </li>
+    	<% } %>
+
+   
+	  </ul>
+	
+</nav>

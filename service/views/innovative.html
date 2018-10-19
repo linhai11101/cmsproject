@@ -1,0 +1,103 @@
+<!--首页-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= config.title %></title>
+
+  <% include ./block/head.html %>
+
+  <link rel="stylesheet" href="<%= assetsPath %>/cms/css/innovative.css">
+
+</head>
+<body>
+
+  <% include ./components/header-en.html %>
+ 
+
+ <div class="uk-container-center uk-margin-small-top banner-box">
+ <% if(innovativeBanner&&innovativeBanner.length){ %>  
+<div class="fullSlide">
+   <div class="bd"> 
+                <ul>  
+         <% innovativeBanner.forEach(function(single){ %>  
+        <li ><a href="<%= single.link%>"><img src="<%- resize(single.img, 1900, 360, 3) %>"></a></li>
+          <% }) %>  
+          </ul>  
+              </div>
+              <div class="hd">
+                <ul class="uk-flex round">
+                <% innovativeBanner.forEach(function(item, i){ %>
+                  <li></li>
+                  <% }) %>
+                </ul>
+              </div>
+             <!--  <a class="prev" href="javascript:void(0)"><</a>
+              <a class="next" href="javascript:void(0)">></a> -->
+  </div>
+ <% } %>
+      <div class="uk-nav">
+      <ul>
+      <% innovative.forEach(function(item, i){ %>
+      <li>
+        <a href="#cate<%= i %>"><h4 data-index="<%= i %>" class="cate-name"><%= item.nameEn %></h4>
+      <img src="<%- resize(item.img,240, 160, 3) %>"></a>
+      </li>
+      <% }) %>
+      </ul>
+      </div>
+
+ </div>
+
+ <div class="uk-container uk-container-center">
+          <ul class="cate">
+           <% innovativeProduct.forEach(function(single, i){ %>
+
+                  <li id="cate<%= i %>" > <h3  ><%=single.nameEn %> </h3>
+                    <ul class="product">
+
+                      <% single.products.forEach(function(item, i){ %>
+                      <li <% if(item.privacy==0){%> class="itemPrivacy"<%}%>>
+                       <%  if(item.sld) { %>
+                        <a href="//<%=item.sld %>.shop.<%= domain_url %>/product/<%=item.id%>.html">
+                              <img src="<%- resize(item.img, 320, 300, 3) %>">
+                           </a>
+                          <% }else{ %>
+                          <a href="/product/<%=item.id%>.html">
+                              <img src="<%- resize(item.img, 320, 300, 3) %>">
+                           </a>
+                             <% }%> 
+
+                           <%  if(item.sld) { %>   
+                        <a href="//<%=item.sld %>.shop.<%= domain_url %>/product/<%=item.id%>.html"><h4><%= item.name%></h4></a>
+                        <% }else{ %>
+                      <a href="/product/<%=item.id%>.html"><h4><%= item.name%></h4></a>
+                         <% }%> 
+
+                        <% if(item.priceRange != '0.00' && item.privacy!=0){%>
+                        <h3>US $<%= item.priceRange%></h3>
+                        <% }else{ %>
+                        <h4 class="no-price">Contact Suppliers to Get Price</h4>
+                        <%}%>
+                        <h5>Min.Order.<%= item.minOrder%> Piece</h5>
+                      </li>
+                      <% }) %>
+                      
+                    </ul>
+                  </li>
+                  <% }) %>
+                  </ul>
+    </div>
+ <% include ./components/footer-en.html %>
+    <% include ./block/js.html %>
+    <% include ./components/back-top.html %>
+  
+  <script>
+    var logoText = <%- JSON.stringify(logoText) %>;
+    var innovativeProductj = <%- JSON.stringify(innovativeProduct) %>
+  </script>
+  <script src="<%= assetsPath %>/cms/js/innovative.js"></script>
+</body>
+</html>

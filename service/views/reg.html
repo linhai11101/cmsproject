@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1, user-scalable=no"> -->
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name ="viewport" content ="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no"> 
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="HandheldFriendly" content="true">
+<meta name="MobileOptimized" content="320">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<meta name="full-screen" content="yes">
+<meta name="x5-fullscreen" content="true">
+<meta name="browsermode" content="application">
+<meta name="x5-page-mode" content="app">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="keywords" content="会员注册">
+<meta name="description" content="会员注册">
+<title>会员注册</title>
+<link rel="stylesheet" href="http://static.mr-world.com/global/css/global.css">
+<script type="text/javascript" src="http://static.mr-world.com/lib/components_module/jquery/jquery.js"></script>
+<style type="text/css">
+*{margin:0;padding: 0;}
+body{font:100%/ 1.5 "verdana","Helvetica Neue", Helvetica, Arial,"微软雅黑" ,sans-serif;background: #f2f2f2;color:#333;min-width:auto;}
+
+header{text-align: center;background:#f08200;height: 4rem;line-height: 4rem;color:#fff;font-size: 1.5rem}
+img{border: none;}
+input[placeholder], [placeholder], *[placeholder] {
+color: #999999;font-size: 1rem;
+} 
+em{color:red;padding-left: 5%;}
+.logo{text-align: center;margin-top: 3rem}
+.regFormBox{padding:1rem;}
+.memTypeBox label{float: left;color:#999;margin-right: 0.5rem}
+.memTypeBox .formControls{color:#999;}
+span.check{color:#f08200;}
+.regFormBox .formRow{position:relative;margin-top:20px}
+.regFormBox .memTypeBox {margin-top: 0;padding-left: 10%;}
+
+.regFormBox .formRow input[type="text"],.regFormBox .formRow input[type="password"]{border: 1px solid #ddd;border-radius: 30px;padding:15px 0 15px 0;width: 100%;box-shadow:none;text-indent:3rem;}
+
+.icon-user{background: url(http://static.mr-world.com/global/images/sprite.png) no-repeat -1px 14px;display: block;width: 40px;height: 48px;position:absolute;top:0;left:5px;}
+.icon-pwd{background: url(http://static.mr-world.com/global/images/sprite.png) no-repeat -50px 15px;display: block;width: 40px;height: 48px;position:absolute;top:0;left:5px;}
+#form-register .btn-panel{margin-top: 40px;}
+.btn-panel button{background:#f08200;width: 100%;padding: 12px 0;border:0;cursor: pointer;color: #fff;font-size: 1.5rem;border-radius: 30px;}
+footer{margin-top: 5rem;text-align: center;font-size: 0.9rem}
+footer a{color:#006dd3;}
+
+#form-reg1{display: none;}
+.verificationBT{position: absolute;right:5%;top:14px;font-size: 1rem;color:#006dd3;text-decoration: none;background: none;border:0;cursor: pointer;}
+</style>
+</head>
+<body>
+<header>Register</header>
+
+  <div class="logo"><img src="http://static.mr-world.com/global/images/logo.png"></div>
+  <div class="regFormBox">
+    <div class="memTypeBox">
+        <label>User:</label>
+        <div class="formControls">
+        <span><input type="radio" name="memType" checked="true" value="1">&nbsp;Buyer</span>&nbsp;&nbsp;&nbsp;
+         <span> <input type="radio" name="memType" value="2">&nbsp;Supplier</span>
+        </div>
+      </div>
+
+    <form id="form-register">
+      
+
+       <div class="formRow">
+          <i class="icon-user"></i> <input type="text" placeholder="Please enter Email" name="email" class="userInfo" id="email">
+       </div>
+
+       <div class="formRow">
+         <i class="icon-pwd"></i> <input type="password" placeholder="Plesase enter Password" name="password" class="userInfo" id="password">
+       </div>
+
+        <div class="formRow btn-panel">
+            <button type="button" id="btn-submit" data-type="appShare">Create</button>
+        </div>
+
+
+    </form>
+
+     <form id="form-reg1">
+      
+       <div class="formRow">
+          <i class="icon-user"></i> <input type="text" placeholder="请输入常用手机号码" name="phone" class="userInfo" id="phone">
+       </div>
+
+       <div class="formRow">
+         <i class="icon-pwd"></i> <input type="text" name="code" class="userInfo" id="code">
+         <button type="button" id="verificationBT" class="verificationBT">发送验证码</button>
+                                
+       </div>
+<br/>
+        <div class="formRow btn-panel">
+            <button type="button" id="next" data-type="appShare">下一步</button>
+        </div>
+
+
+    </form>
+
+
+    <footer> Approved the<a href="http://www.mr-world.com/user/buyerRegProtocol.html">“Registeration agreement”</a></footer>
+  </div>
+
+  <script type="text/javascript">
+    var assetsUrl = '<%= assetsPath %>';
+    var imgHost = '<%= imgHost%>';
+    var domain = commonApi = '<%= domainPath%>';
+
+
+   function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); 
+            var r = window.location.search.substr(1).match(reg);  
+            if (r != null) return unescape(r[2]); return null; 
+    }
+
+
+
+   var icode = getUrlParam('icode');
+
+
+    $("body input[name='memType']").each(function () {
+      var _this = $(this);
+      _this.on("click",function(){
+        if(_this.val()=='1'){
+          $("#form-register").show();
+          $("#form-reg1").hide();
+
+        }else{
+          $("#form-register").hide();
+           $("#form-reg1").show();
+        }
+           
+       _this.parent().addClass("check").siblings().removeClass("check");
+
+
+      })
+      
+    })
+
+
+  </script>
+<script src="<%= assetsPath %>/global/js/require-config.min.js"></script>
+<script src="http://static.mr-world.com/global/js/global.js"></script>
+
+
+  <script src="<%= assetsPath %>/ec/js/register/register.js"></script>
+  <script src="<%= assetsPath %>/ec/js/register/register_zh1.js"></script>
+</body>
+</html>
