@@ -6,7 +6,7 @@ var config = require('../config');
 
 //链接数据库
 var dbUrl = config.URL;
-var db = mongoose.connect(dbUrl)
+var db = mongoose.connect(dbUrl);
 
 var _user = {
   name: 'admin',
