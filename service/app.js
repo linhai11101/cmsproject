@@ -14,44 +14,6 @@ var router = express.Router();
 var config = require('./config');
 var logger = require('./middlewares/requireLog'); //日志
 
-
-//三级域名要用
-var Public = require('./controllers/public');
-var Cluster = require('./models/cluster');
-var eventproxy = require('eventproxy');
-var IndustrialTownMenu = require('./models/industrialTownMenu');
-var IndustrialTownMenu = require('./models/industrialTownMenu');
-var IndustrialTops = require('./models/industrialTops');
-var IndustrialTownBanner = require('./models/industrialTownBanner');
-var IndustrialTownAct = require('./models/industrialTownAct');
-var IndustrialTownFB = require('./models/industrialTownFB');
-var IndustrialAllActivitys = require('./models/industrialallactivitys');
-var IndustrialIndexCate = require('./models/industrialIndexCate');
-var IndustrialIndexAct = require('./models/industrialIndexAct');
-var IndustrialIndexWS = require('./models/industrialIndexWS');
-var IndustrialIndexFB = require('./models/industrialIndexFB');
-var IndustrialActivityAct = require('./models/industrialActivityAct');
-var IndustrialActivityBanner = require('./models/industrialActivityBanner');
-
-var MarketBanner = require('./models/marketBanner');
-var MarketRecommendation = require('./models/marketRecommendation');
-var MarketRecommendProduct = require('./models/marketRecommendProduct');
-var MarketHot = require('./models/marketHot');
-var MarketHotProduct = require('./models/marketHotProduct');
-var MarketBest = require('./models/marketBest');
-var MarketBestProduct = require('./models/marketBestProduct');
-var MarketIndexActive = require('./models/marketIndexActive');
-var MarketFeedback = require('./models/marketFeedback');
-var MarketActiveBanner = require('./models/marketActiveBanner');
-var MarketActive = require('./models/marketActive');
-var MarketCate = require('./models/marketCate');
-var MarketAllActivitys = require('./models/marketallactivitys');
-var MarketMenu = require('./models/marketMenu');
-var MarketProduct = require('./models/marketProduct');
-var MarketFloor = require('./models/marketFloor');
-var MarketContentFloor = require('./models/marketContentFloor');
-
-
 //链接数据库
 var dbUrl = config.URL;
 var db = mongoose.connect(dbUrl);
