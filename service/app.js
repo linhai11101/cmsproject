@@ -18,7 +18,7 @@ var logger = require('./middlewares/requireLog'); //日志
 var dbUrl = config.URL;
 var db = mongoose.connect(dbUrl);
 db.connection.on("error", function(error) { console.log("数据库连接失败：" + error); });
-db.connection.on("open", function() { console.log("------数据库连接成功00！------"); });
+db.connection.on("open", function() { console.log("------数据库连接成功！------"); });
 
 
 var app = express();
