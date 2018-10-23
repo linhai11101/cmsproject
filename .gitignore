@@ -4,3 +4,4 @@ client/npm-debug.log
 service/npm-debug.log
 client/package-lock.json
 service/package-lock.json
+service/logs/
